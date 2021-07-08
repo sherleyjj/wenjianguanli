@@ -1,0 +1,67 @@
+//将SQL server2000中保存的图像显示在Picture中
+  private void listBox1_SelectedIndexChanged(object sender, System.EventArgs e)
+  {
+   byte[] buffByte = null;
+   string comm = @"select img from table1 where id = " + this.listBox1.SelectedValue ;
+   this.sqlCommand1 = new System.Data.SqlClient.SqlCommand ();
+   this.sqlCommand1.CommandType = System.Data.CommandType.Text ;
+   this.sqlCommand1.CommandText = comm;
+   this.sqlCommand1.Connection = this.sqlConnection1 ;
+   this.sqlConnection1.Open();
+   System.Data.SqlClient.SqlDataReader rd = this.sqlCommand1.ExecuteReader();
+   while (rd.Read())
+   {
+    buffByte = ((byte[])rd[0]);
+   }
+   rd.Close();
+   this.sqlConnection1.Close();
+   //将图像的字节数组放入内存流
+   System.IO.MemoryStream ms = new System.IO.MemoryStream(buffByte);
+   //通过流对象建立Bitmap
+   System.Drawing.Bitmap bmp = new Bitmap(ms);
+   this.pictureBox1.Image = bmp;
+  }
+  
+  //将图像保存到SQL server2000的Image字段中
+  private void button2_Click_1(object sender, System.EventArgs e)
+  {
+   string pathName;
+   if (this.openFileDialog1.ShowDialog()==System.Windows.Forms.DialogResult.OK)
+   {
+    pathName = this.openFileDialog1.FileName;
+    System.Drawing.Image img = System.Drawing.Image.FromFile(pathName);
+    this.pictureBox1.Image = img;
+    
+    //将图像读入到字节数组
+    System.IO.FileStream fs = new System.IO.FileStream(pathName,System.IO.FileMode.Open,System.IO.FileAccess.Read);
+    byte[] buffByte = new byte[fs.Length];
+    fs.Read(buffByte,0,(int)fs.Length);
+    fs.Close();
+    fs = null;
+    
+    //建立Command命令
+    string comm = @"Insert into table1(img,name) values(@img,@name)";
+    this.sqlCommand1 = new System.Data.SqlClient.SqlCommand ();
+    this.sqlCommand1.CommandType = System.Data.CommandType.Text ;
+    this.sqlCommand1.CommandText = comm;
+    this.sqlCommand1.Connection = this.sqlConnection1 ;
+    //创建Parameter
+    this.sqlCommand1.Parameters.Add("@img",System.Data.SqlDbType.Image);
+    this.sqlCommand1.Parameters[0].Value = buffByte;
+    this.sqlCommand1.Parameters.Add("@name",System.Data.SqlDbType.VarChar);
+    this.sqlCommand1.Parameters[1].Value =pathName.Substring(pathName.LastIndexOf("\\")+1);
+    try
+    {
+     this.sqlConnection1.Open();
+     this.sqlCommand1.ExecuteNonQuery();
+     this.sqlConnection1.Close();
+    }
+    catch(System.Exception ee)
+    {
+     MessageBox.Show(ee.Message );
+    }
+    buffByte = null; 
+    this.FillListBox();
+   }
+}
+
