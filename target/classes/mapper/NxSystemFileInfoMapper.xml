@@ -15,5 +15,9 @@
         select `nx_system_file_info`.* from `nx_system_file_info`
         where `nx_system_file_info`.`fileName` = #{name}
     </select>
+    <select id="findNxFileInfoByMd5" resultType="com.example.entity.NxSystemFileInfo">
+        select nx.* from nx_system_file_info as nx inner join system_file_info_hashcode as ha on ha.hash_code =#{md5}
+        and ha.system_file_info_id = nx.id
+    </select>
 
 </mapper>

@@ -11,4 +11,5 @@ import java.util.List;
 public interface NxSystemFileInfoDao extends Mapper<NxSystemFileInfo> {
     List<NxSystemFileInfo> findByName(@Param("name") String name);
     NxSystemFileInfo findByFileName(@Param("name") String name);
+    NxSystemFileInfo findNxFileInfoByMd5(String md5);
 }

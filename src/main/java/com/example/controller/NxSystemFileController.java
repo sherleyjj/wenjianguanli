@@ -9,6 +9,7 @@ import com.example.entity.SystemFileInfoHashCode;
 import com.example.exception.CustomException;
 import com.example.service.FileInfoService;
 import com.example.service.NxSystemFileInfoService;
+import com.example.vo.IsContainAndNxInfo;
 import com.github.pagehelper.PageInfo;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.codec.digest.Md5Crypt;
@@ -38,15 +39,17 @@ public class NxSystemFileController {
     @Resource
     private FileInfoService fileInfoService;
 
+    /**
+     * 前端上传文件，包括文件的hash码，应该先检验hash码再上传，如果调用该方法代表hash是不存在的
+     * @param file
+     * @param hashcode
+     * @param request
+     * @return
+     * @throws IOException
+     */
     @PostMapping("/upload/{hashcode}")
     public Result upload(MultipartFile file,@PathVariable("hashcode") String hashcode,HttpServletRequest request) throws IOException {
         String originName = file.getOriginalFilename();
-        // 1. 先查询有没有相同名称的文件
-//        NxSystemFileInfo fileInfo = nxSystemFileInfoService.findByFileName(name);
-//        if (fileInfo != null) {
-//            throw new CustomException("1001", "文件名：\"" + name + "\"已存在");
-//        }
-        // 文件名加个时间戳
         String fileName = FileUtil.mainName(originName) + System.currentTimeMillis() + "." + FileUtil.extName(originName);
         byte [] source = file.getBytes();
         /**
@@ -153,7 +156,21 @@ public class NxSystemFileController {
     }
 
     @GetMapping("/isexist/{hash}")
-    public Result isExistSameFile(@PathVariable String hash){
-        return Result.success(fileInfoService.isExistSameFileByHashCode(String.valueOf(hash)));
+    public Result isExistSameFileAndGetNxFileInfo(@PathVariable String hash){
+        Result result = new Result();
+        IsContainAndNxInfo info = new IsContainAndNxInfo();
+        NxSystemFileInfo nxSystemFileInfo =  nxSystemFileInfoService.findNxFileInfoByMd5(hash);
+        if (nxSystemFileInfo != null){
+            info.setExist(true);
+            info.setFileName(nxSystemFileInfo.getFileName());
+            info.setId(nxSystemFileInfo.getId());
+            info.setOriginName(nxSystemFileInfo.getOriginName());
+            result.setCode("0");
+        }else{
+            info.setExist(false);
+            result.setCode("1");
+        }
+        result.setData(info);
+        return result;
     }
 }

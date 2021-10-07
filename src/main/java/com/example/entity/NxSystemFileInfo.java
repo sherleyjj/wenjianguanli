@@ -36,4 +36,13 @@ public class NxSystemFileInfo {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+
+	@Override
+	public String toString() {
+		return "NxSystemFileInfo{" +
+				"id=" + id +
+				", originName='" + originName + '\'' +
+				", fileName='" + fileName + '\'' +
+				'}';
+	}
 }

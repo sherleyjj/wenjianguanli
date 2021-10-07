@@ -35,7 +35,7 @@ public class NxSystemFileInfoService {
             throw new RuntimeException("HashCode Is Null");
         }
         if (fileInfoService.isExistSameFileByHashCode(hashcode)){
-            throw new CustomException("失败","相同文件以及存在");
+            throw new CustomException("失败","相同文件以及存在来自HashCode");
         }
         nxSystemFileInfoDao.insertSelective(nxSystemFileInfo);
         SystemFileInfoHashCode systemFileInfoHashCode = new SystemFileInfoHashCode();
@@ -69,5 +69,8 @@ public class NxSystemFileInfoService {
         PageHelper.startPage(pageNum, pageSize);
         List<NxSystemFileInfo> all = nxSystemFileInfoDao.findByName(name);
         return PageInfo.of(all);
+    }
+    public NxSystemFileInfo findNxFileInfoByMd5(String md5){
+        return nxSystemFileInfoDao.findNxFileInfoByMd5(md5);
     }
 }

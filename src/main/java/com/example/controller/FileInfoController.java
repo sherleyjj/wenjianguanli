@@ -76,7 +76,7 @@ public class FileInfoController {
     }
 
     @GetMapping("/hashcode/{code}")
-    public Result<FileInfo> findByHashCode(@PathVariable("code") String hashCode){
+    public Result<FileInfo> findFileIngfoByHashCode(@PathVariable("code") String hashCode){
         return Result.success(fileInfoService.findByHash(hashCode));
     }
 }

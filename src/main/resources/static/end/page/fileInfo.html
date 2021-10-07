@@ -240,7 +240,7 @@
                             <label class="col-sm-3 control-label">上传文件</label>
                             <div class="col-sm-7">
                                 <div style="margin-top: 8px">
-                                    <input id="upload-file-id" @change="upload" type="file" ref="file">
+                                    <input id="upload-file-id" type="file" ref="file">
                                 </div>
                             </div>
                         </div>
@@ -248,7 +248,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="update()">保存</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="isSameFileAndUpdate">保存</button>
                 </div>
             </div>
         </div>
@@ -341,33 +341,43 @@
                 });
             },
             isSameFileAndUpdate:function(){
-                var md5s = this.calculateMd5()
-
-                for (const md5sKey in md5s) {
-                    axios.post('/isexist/'+md5s[md5sKey]).then(res => {
-                        if (res.data.code === 0){
-                            msg('success','文件上传成功')
-                        }else{
-                            this.upload(md5sKey,md5s[md5sKey]);
-                        }
-                    })
-                }
-
-
-
-            },
-            calculateMd5:function (){
+                var md5s = [];
                 let files = this.$refs.file.files;
                 for (let i = 0; i < files.length; i++) {
                     const fileReader = new FileReader();
                     fileReader.readAsBinaryString(files[i])
                     fileReader.onload = e => {
-                        this.md5s[i] = SparkMD5.hashBinary(e.target.result);
+                        md5s[i] = SparkMD5.hashBinary(e.target.result);
+                        axios.get('/files/isexist/'+md5s[0]).then(res => {
+                            console.log(res.data)
+                            if (res.data.data.exist === true){
+                                //卡在这儿了，需要entity数据 提供给update函数
+                                this.entity.fileId = res.data.data.id;
+                                this.entity.fileName = res.data.data.originName;
+                                msg('success','秒传成功')
+                                this.update();
+                            }else{
+                                this.upload(0,md5s[0]);
+                            }
+                        })
                     }
                 }
-                return this.md5s;
+
             },
+            // calculateMd5:function (){
+            //     let files = this.$refs.file.files;
+            //     for (let i = 0; i < files.length; i++) {
+            //         const fileReader = new FileReader();
+            //         fileReader.readAsBinaryString(files[i])
+            //         fileReader.onload = e => {
+            //             this.md5s[i] = SparkMD5.hashBinary(e.target.result);
+            //             console.log(this.md5s[0])
+            //         }
+            //     }
+            //     return this.md5s;
+            // },
             upload: function (index,hash) {
+                console.log("真实上传文件被调用")
                 let files = this.$refs.file.files;
                 let formData = new FormData();
                 formData.append('file', files[index]);
@@ -380,6 +390,7 @@
                         msg('success','文件上传成功');
                         this.entity.fileId = res.data.data.id;
                         this.entity.fileName = res.data.data.originName;
+                        this.update();
                     } else {
                         msg('error', res.data.msg);
                     }
@@ -436,6 +447,7 @@
                 });
             },
             init(o) {
+                console.log(this.permission)
                 if (this.permission.indexOf(3) === -1) {
                     msg('warning', '你没有权限操作');
                     return;
