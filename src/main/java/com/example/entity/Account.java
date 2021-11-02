@@ -1,17 +1,25 @@
 package com.example.entity;
 
-import javax.persistence.*;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
-public class Account {
+import javax.persistence.*;
+import java.io.Serializable;
+
+public class Account implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "password")
     private String password;
+
     @Column(name = "level")
     private Integer level;
+
     @Column(name = "sex")
     private String sex;
     @Transient

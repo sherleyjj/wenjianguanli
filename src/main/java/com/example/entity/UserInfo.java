@@ -1,9 +1,10 @@
 package com.example.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "user_info")
-public class UserInfo extends Account {
+public class UserInfo extends Account implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

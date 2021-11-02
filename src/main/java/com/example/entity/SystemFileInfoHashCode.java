@@ -1,9 +1,10 @@
 package com.example.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "system_file_info_hashcode")
-public class SystemFileInfoHashCode {
+public class SystemFileInfoHashCode implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

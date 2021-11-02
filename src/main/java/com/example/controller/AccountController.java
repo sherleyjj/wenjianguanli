@@ -6,6 +6,7 @@ import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import com.example.common.Result;
 import com.example.common.ResultCode;
+import com.example.common.annotation.JBasicLog;
 import com.example.entity.Account;
 import com.example.entity.AuthorityInfo;
 import com.example.exception.CustomException;
@@ -15,6 +16,7 @@ import com.example.entity.UserInfo;
 import com.example.service.AdminInfoService;
 import com.example.service.UserInfoService;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +28,7 @@ import cn.hutool.json.JSONUtil;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 public class AccountController {
 
@@ -37,7 +40,7 @@ public class AccountController {
 	@Resource
 	private UserInfoService userInfoService;
 
-
+	@JBasicLog
     @PostMapping("/login")
     public Result<Account> login(@RequestBody Account account, HttpServletRequest request) {
         if (StrUtil.isBlank(account.getName()) || StrUtil.isBlank(account.getPassword()) || account.getLevel() == null) {
@@ -53,6 +56,7 @@ public class AccountController {
 		}
 
         request.getSession().setAttribute("user", login);
+//		log.info("访问用户{}",account.getName());
         return Result.success(login);
     }
 
@@ -80,6 +84,7 @@ public class AccountController {
         return Result.success();
     }
 
+    @JBasicLog
     @GetMapping("/auth")
     public Result getAuth(HttpServletRequest request) {
         Object user = request.getSession().getAttribute("user");
@@ -117,6 +122,7 @@ public class AccountController {
         return Result.success(map);
     }
 
+    @JBasicLog
     @GetMapping("/getAuthority")
     public Result<List<AuthorityInfo>> getAuthorityInfo() {
         List<AuthorityInfo> authorityInfoList = JSONUtil.toList(JSONUtil.parseArray(authorityStr), AuthorityInfo.class);

@@ -1,8 +1,9 @@
 package com.example.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class AuthorityInfo {
+public class AuthorityInfo implements Serializable {
     private Integer level;
     private String name;
     private List<Model> models;

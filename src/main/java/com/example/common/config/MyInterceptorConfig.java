@@ -10,6 +10,7 @@ public class MyInterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         // 实现WebMvcConfigurer不会导致静态资源被拦截
         registry.addInterceptor(new MyInterceptor())
+//                .addPathPatterns("/**")
                 .addPathPatterns("/end/page/**")
                 .excludePathPatterns("/end/page/login.html", "/end/page/register.html");
     }

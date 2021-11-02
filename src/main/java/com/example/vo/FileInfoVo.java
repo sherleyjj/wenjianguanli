@@ -2,7 +2,9 @@ package com.example.vo;
 
 import com.example.entity.FileInfo;
 
-public class FileInfoVo extends FileInfo {
+import java.io.Serializable;
+
+public class FileInfoVo extends FileInfo implements Serializable {
 
 	private String typeName;
 

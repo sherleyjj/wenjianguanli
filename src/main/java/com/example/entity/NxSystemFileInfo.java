@@ -1,9 +1,10 @@
 package com.example.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "nx_system_file_info")
-public class NxSystemFileInfo {
+public class NxSystemFileInfo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

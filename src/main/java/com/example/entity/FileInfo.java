@@ -1,9 +1,10 @@
 package com.example.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "file_info")
-public class FileInfo  {
+public class FileInfo  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

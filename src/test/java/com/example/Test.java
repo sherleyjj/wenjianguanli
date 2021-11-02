@@ -5,6 +5,7 @@ import com.example.controller.AccountController;
 import com.example.controller.FileInfoController;
 import com.example.controller.NxSystemFileController;
 import com.example.controller.UserInfoController;
+import com.example.dao.UserInfoDao;
 import com.example.entity.SystemFileInfoHashCode;
 import com.example.service.FileInfoService;
 import com.example.service.NxSystemFileInfoService;
@@ -38,6 +39,9 @@ public class Test {
     private FileInfoController controller;
     @Autowired
     private NxSystemFileInfoService nxSystemFileInfoService;
+
+    @Autowired
+    private UserInfoDao userInfoDao;
 
     @org.junit.Test
     public void test1(){
@@ -77,17 +81,20 @@ public class Test {
     }
     @org.junit.Test
     public void test5(){
-        UserInfoVo userInfoVo = new UserInfoVo();
-        userInfoVo.setAge(18);
-        userInfoVo.setAddress("四川省");
-        userInfoVo.setLevel(2);
-        userInfoVo.setPassword("123456");
-        userInfoVo.setName("江德鸿");
-        userInfoVo.setNickName("开心超人 ");
-        userInfoVo.setPhone("15881883011");
-        userInfoVo.setSex("Male");
-        userInfoVo.setEmail("1714203542@qq.com");
-        userInfoController.add(userInfoVo);
+        for (int i = 347954; i < 1000000; i++) {
+            UserInfoVo userInfoVo = new UserInfoVo();
+            userInfoVo.setAge(18);
+            userInfoVo.setAddress("四川省");
+            userInfoVo.setLevel(2);
+            userInfoVo.setPassword("123456");
+            userInfoVo.setName("kasttt"+i);
+            userInfoVo.setNickName("开心超人 ");
+            userInfoVo.setPhone("15881883011");
+            userInfoVo.setSex("Male");
+            userInfoVo.setEmail("1714203542@qq.com");
+            userInfoDao.insertSelective(userInfoVo);
+//            userInfoController.add(userInfoVo);
+        }
     }
 
 
