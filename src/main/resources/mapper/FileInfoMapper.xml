@@ -4,6 +4,19 @@
     <insert id="addHashCode" useGeneratedKeys="true" keyColumn="id">
         insert into system_file_info_hashcode(hash_code,system_file_info_id) values (#{filehashCode} , #{fileId})
     </insert>
+    <update id="updateRef">
+        update `system_file_info_hashcode` set reference_count = #{nextValue} where system_file_info_id = #{file_id}
+    </update>
+    <delete id="deleteHashByFileIdOrId">
+        delete from `system_file_info_hashcode`
+        where 1 = 1
+        <if test="file_id != null">
+            and `system_file_info_id` = #{file_id}
+        </if>
+        <if test="id != null">
+            and `id` = #{id}
+        </if>
+    </delete>
 
     <select id="findByNameAndId" resultType="com.example.vo.FileInfoVo">
         select `file_info`.*, `type_info`.name as typeName from `file_info`
@@ -28,5 +41,8 @@
         select fi.* , type_info.name as typeName from
             system_file_info_hashcode as hs inner join nx_system_file_info as si on hs.system_file_info_id = si.id and hs.hash_code =#{hash}
                                             inner join file_info as fi on fi.fileId = si.id   left join type_info on fi.typeId = type_info.id
+    </select>
+    <select id="selectFileRefernce" resultType="java.lang.Integer">
+        select reference_count from system_file_info_hashcode where system_file_info_id = #{file_id}
     </select>
 </mapper>

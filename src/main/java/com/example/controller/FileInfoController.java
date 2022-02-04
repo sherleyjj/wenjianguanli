@@ -30,16 +30,16 @@ public class FileInfoController {
         return Result.success(info);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")  //file_info 的id
     public Result delete(@PathVariable Long id, HttpServletRequest request) {
         Account account = (Account) request.getSession().getAttribute("user");
         FileInfo info = fileInfoService.findById(id);
         if (!account.getLevel().equals(info.getLevel()) || !account.getId().equals(info.getUploadUserId())) {
             return Result.error("1001", "不能删除他人的记录");
         }
-        fileInfoService.delete(id);
-        // 删除对应文件记录
-        if (info.getFileId() != null) {
+        int value = fileInfoService.delete(id);
+        // 删除对应真实文件
+        if (info.getFileId() != null && value == 0) {
             nxSystemFileController.deleteFile(info.getFileId().toString());
         }
         return Result.success();

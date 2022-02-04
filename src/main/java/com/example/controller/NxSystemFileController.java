@@ -113,7 +113,7 @@ public class NxSystemFileController {
     }
 
     /**
-     * 限制下载数有bug，下载会有中断的情况，然后导致数据对不上，是否能采用多线程的东西
+     * 限制下载数有bug，下载会有中断的情况，然后导致数据对不上，是否能采用多线程的东西,尝试用aop试一试
      * @param id
      * @param response
      * @param request
@@ -124,14 +124,14 @@ public class NxSystemFileController {
         if ("null".equals(id)) {
             throw new CustomException("1001", "您未上传文件");
         }
-        Integer downloadCount =(Integer) request.getSession().getAttribute("downloadCount");
-        downloadCount = downloadCount==null?0:downloadCount;
-        log.info("{}:当前下载数{}",((Account)request.getSession().getAttribute("user")).getName()
-                ,downloadCount);
-        if (downloadCount>1){
-            throw new CustomException("失败","只能同时下载一个文件");
-        }
-        request.getSession().setAttribute("downloadCount",++downloadCount);
+//        Integer downloadCount =(Integer) request.getSession().getAttribute("downloadCount");
+//        downloadCount = downloadCount==null?0:downloadCount;
+//        log.info("{}:当前下载数{}",((Account)request.getSession().getAttribute("user")).getName()
+//                ,downloadCount);
+//        if (downloadCount>2){
+//            throw new CustomException("失败","只能同时下载一个文件");
+//        }
+//        request.getSession().setAttribute("downloadCount",++downloadCount);
         NxSystemFileInfo nxSystemFileInfo = nxSystemFileInfoService.findById(Long.parseLong(id));
         if (nxSystemFileInfo == null) {
             throw new CustomException("1001", "未查询到该文件");
@@ -162,7 +162,7 @@ public class NxSystemFileController {
 //        toClient.write(bytes,i,bytes.length-i);
 //        toClient.flush();
 //        toClient.close();
-        request.getSession().setAttribute("downloadCount",--downloadCount);
+//        request.getSession().setAttribute("downloadCount",--downloadCount);
     }
 
     /**

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>登录页面</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/font-awesome.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+    <div class="container" id="app">
+        <div class="row clearfix">
+            <div class="col-md-4 column">
+                <div class="panel-group" id="panel-45316">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a class="panel-title" data-toggle="collapse" data-parent="#panel-45316" href="#panel-element-158840">Collapsible Group Item #1</a>
+                        </div>
+                        <div id="panel-element-158840" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                Anim pariatur cliche...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a class="panel-title" data-toggle="collapse" data-parent="#panel-45316" href="#panel-element-142249">Collapsible Group Item #2</a>
+                        </div>
+                        <div id="panel-element-142249" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                Anim pariatur cliche...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 column">
+                <p>
+                    <em>Git</em> 是一个分布式的版本控制系统，最初由 <strong>Linus Torvalds</strong> 编写，用作Linux内核代码的管理。在推出后，Git在其它项目中也取得了很大成功，尤其是在 <small>Ruby</small> 社区中。
+                </p>
+            </div>
+            <div class="col-md-4 column">
+
+                <div class="row clearfix" v-for="(item,index) in authorities" :value="item">
+                    <div class="col-md-6 column">
+                        <p>
+                            {{item}}+{{index}}
+                        </p>
+                        <!-- 实现动态改变 -->
+                        <input type="text" class="form-control" v-model="authorities[index]" placeholder="{{item}}" />
+                    </div>
+                    <div class="col-md-6 column">
+                        <a id="modal-237257" href="#modal-container-237257" role="button" class="btn" data-toggle="modal" @click="change(index)">触发遮罩窗体</a>
+
+                        <div class="modal fade" id="modal-container-237257" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h4 class="modal-title" id="myModalLabel">
+                                            {{currentindex}}
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{currentData}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                        <button type="button" class="btn btn-primary">保存</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/jquery-1.10.2.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/vue2.6.11/vue.min.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                user: {
+                    name: "",
+                    password: "",
+                    level: null
+                },
+                authorities: ['a', 'b', 'c', 'd', 'e', 's', 's', 'a'],
+                currentindex: null,
+                currentData: null
+            },
+            methods: {
+                change(index) {
+                    this.currentindex = index;
+                    this.currentData = this.authorities[index];
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

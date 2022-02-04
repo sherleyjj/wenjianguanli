@@ -14,6 +14,8 @@ public class SystemFileInfoHashCode implements Serializable {
     @Column(name = "system_file_info_id")
     private Long fileId;
 
+    @Column(name = "reference_count")
+    private Integer refer;
     public Long getFileId() {
         return fileId;
     }

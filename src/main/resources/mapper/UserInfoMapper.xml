@@ -23,6 +23,7 @@
         order by `user_info`.id
     </select>
     <select id="count" resultType="Integer">
-        select count(id) from `user_info`
+        select count(userCount) from `count_info`
+--         需要优化
     </select>
 </mapper>

@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.dao.CountInfoDao;
 import com.example.dao.UserInfoDao;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -21,6 +22,8 @@ public class UserInfoService {
 
     @Resource
     private UserInfoDao userInfoDao;
+    @Resource
+    private CountInfoDao countInfoDao;
 
     public UserInfo add(UserInfo userInfo) {
         // 唯一校验

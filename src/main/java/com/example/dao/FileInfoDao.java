@@ -17,7 +17,19 @@ public interface FileInfoDao extends Mapper<FileInfo> {
                                      @Param("id") Long id);
     HashFileInfoVo isExistFileByHashCode(@Param("hashcode")String hashCode);
 
+   /*
+   *  以下与hash表有关
+   *
+   *
+   * */
+
+    void deleteHashByFileIdOrId(@Param("file_id")Long file_id , @Param("id")Integer id);
+
     int addHashCode(SystemFileInfoHashCode hashCode);
 
     FileInfoVo findByHash(String hash);
+
+    int updateRef(@Param("file_id") Long file_id, @Param("nextValue") Integer nextValue);
+
+    int selectFileRefernce(Long file_id);
 }

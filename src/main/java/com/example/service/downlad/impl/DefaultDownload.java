@@ -11,6 +11,8 @@ import java.net.URLEncoder;
 public class DefaultDownload implements IDownloadStrategy {
     //准备使用@value从配置文件读取
     private DownloadType downloadType;
+
+    private int count = 10000;
     @Override
     public DownloadType getDownloadType() {
         return downloadType;
@@ -24,7 +26,6 @@ public class DefaultDownload implements IDownloadStrategy {
         OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
         response.setContentType("application/octet-stream");
         int i = 0;
-        int count = 1000;
         //限速成功
         for (; i < sources.length-count; i+=count) {
             toClient.write(sources,i,count);
@@ -34,12 +35,18 @@ public class DefaultDownload implements IDownloadStrategy {
             }
         }
         i-=count;
-
+        i = i==0?0:i-count;
         toClient.write(sources,i,sources.length-i);
         toClient.flush();
         toClient.close();
     }
     public void download(HttpServletResponse response , File file) throws IOException {
         download(response, FileUtil.readBytes(file));
+    }
+    public void download(HttpServletResponse response , String filepath) throws IOException {
+        byte[] bytes = FileUtil.readBytes(filepath);
+        response.reset();
+        response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(FileUtil.getName(filepath), "UTF-8"));
+        download(response,bytes);
     }
 }
