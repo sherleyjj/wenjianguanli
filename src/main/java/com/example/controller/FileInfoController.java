@@ -79,4 +79,6 @@ public class FileInfoController {
     public Result<FileInfo> findFileIngfoByHashCode(@PathVariable("code") String hashCode){
         return Result.success(fileInfoService.findByHash(hashCode));
     }
+
+
 }

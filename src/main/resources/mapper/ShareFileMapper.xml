@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.dao.ShareFileDao">
+
+
+    <select id="selectByFileIDWithUser" resultType="com.example.vo.ShareFileVo">
+        select  * from  shared_file inner join user_info where fileid = #{fileid} and first_share_user_id = user_info.id
+    </select>
+    <select id="selectAllWithUser"  resultMap="sharefileMap">
+        select   s.* , u.name username
+        from  shared_file as s inner join user_info as u where  first_share_user_id = u.id
+    </select>
+<!--    s.filename,s.first_share_user_id  firstUserId,s.share_date  shareDate,s.fileid ,u.name userName-->
+    <resultMap id="sharefileMap" type="com.example.vo.ShareFileVo">
+        <result column="filename"  property="filename"></result>
+        <result column="first_share_user_id"  property="firstUserId"/>
+        <result column="share_date" property="shareDate"/>
+        <result column="username" property="userName"/>
+        <result column="likes" property="likes"/>
+        <result column="fileid" property="fileid"/>
+        <result column="id" property="id"/>
+    </resultMap>
+</mapper>

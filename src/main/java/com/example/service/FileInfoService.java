@@ -3,10 +3,16 @@ package com.example.service;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.example.dao.FileInfoDao;
+import com.example.dao.ShareFileDao;
 import com.example.entity.FileInfo;
+import com.example.entity.ShareFile;
 import com.example.entity.SystemFileInfoHashCode;
 import com.example.exception.CustomException;
+import com.example.pojo.SharedOrLikes;
+import com.example.to.ShareFileTo;
 import com.example.vo.FileInfoVo;
+import com.example.vo.ShareFileVo;
+import com.example.vo.UserInfoVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
@@ -19,6 +25,8 @@ public class FileInfoService {
 
     @Resource
     private FileInfoDao fileInfoDao;
+    @Resource
+    private ShareFileDao shareFileDao;
 
     public FileInfo add(FileInfo info) {
         int ref = fileInfoDao.selectFileRefernce(info.getFileId());
@@ -85,6 +93,31 @@ public class FileInfoService {
             throw new CustomException("失败","HashCode Is");
         }
         return fileInfoDao.findByHash(hashCode);
+    }
+
+    //TODO 需要重复验证
+    public SharedOrLikes sharedAndLikes(UserInfoVo userInfoVo , FileInfoVo fileInfoVo){
+        if (fileInfoDao.isSharedByFileId(fileInfoVo.getFileId()) == 0 ){
+            //该文件没有被分享，那么直接分享
+            ShareFileTo shareFileTo = new ShareFileTo(fileInfoVo,userInfoVo);
+            shareFileTo.setFilename(fileInfoVo.getName());
+            shareFileTo.setUserInfo(userInfoVo);
+            shareFileTo.setNxfileInfo(fileInfoVo);
+            fileInfoDao.shareFile(shareFileTo);
+            return SharedOrLikes.Share;
+        }else {
+            //TODO 可能会产生重复刷热度的情况
+            ShareFile shareFile = shareFileDao.selectByFileIDWithUser(fileInfoVo.getFileId().intValue());
+            fileInfoDao.updateSharelikes(shareFile);
+            return SharedOrLikes.Like;
+        }
+    }
+
+    //TODO 验证成功
+    public PageInfo<ShareFileVo> findAllShareFilePage(Integer pageNum, Integer pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+        List<ShareFileVo> info = shareFileDao.selectAllWithUser();
+        return PageInfo.of(info);
     }
 
 }

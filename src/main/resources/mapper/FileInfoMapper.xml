@@ -4,8 +4,15 @@
     <insert id="addHashCode" useGeneratedKeys="true" keyColumn="id">
         insert into system_file_info_hashcode(hash_code,system_file_info_id) values (#{filehashCode} , #{fileId})
     </insert>
+    <insert id="shareFile">
+        insert into shared_file(filename,first_share_user_id,likes,fileid) values (#{param1.nxfileInfo.name}
+        ,#{param1.userInfo.id},0,#{param1.fileid})
+    </insert>
     <update id="updateRef">
         update `system_file_info_hashcode` set reference_count = #{nextValue} where system_file_info_id = #{file_id}
+    </update>
+    <update id="updateSharelikes">
+        update shared_file set likes =#{likes} + 1 where fileid = #{fileid}
     </update>
     <delete id="deleteHashByFileIdOrId">
         delete from `system_file_info_hashcode`
@@ -44,5 +51,8 @@
     </select>
     <select id="selectFileRefernce" resultType="java.lang.Integer">
         select reference_count from system_file_info_hashcode where system_file_info_id = #{file_id}
+    </select>
+    <select id="isSharedByFileId" resultType="java.lang.Integer">
+        select count(*) from shared_file where fileid = #{fileid}
     </select>
 </mapper>

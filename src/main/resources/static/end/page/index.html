@@ -51,6 +51,9 @@
 						<li v-if="authority.indexOf(4) != -1">
 							<a href="fileInfo.html"><i class="fa fa-table"></i>文件信息</a>
 						</li>
+                        <li>
+                            <a href="fileInfoAndComment.html"><i class="fa fa-table"></i>文件大厅</a>
+                        </li>
 
 
 
@@ -183,6 +186,7 @@
             axios.get("/authority").then(res => {
                 if (res.data.code === '0') {
                     this.authority = res.data.data;
+                    console.log(this.authority)
                 } else {
                     msg('error', res.data.msg);
                 }

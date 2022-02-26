@@ -1,28 +1,28 @@
 package com.example;
 
 import com.example.common.until.BigHeap;
-import com.example.controller.AccountController;
 import com.example.controller.FileInfoController;
 import com.example.controller.NxSystemFileController;
+import com.example.controller.ShareFileController;
 import com.example.controller.UserInfoController;
+import com.example.dao.FileInfoDao;
 import com.example.dao.UserInfoDao;
+import com.example.entity.NxSystemFileInfo;
 import com.example.entity.SystemFileInfoHashCode;
 import com.example.service.FileInfoService;
 import com.example.service.NxSystemFileInfoService;
+import com.example.to.ShareFileTo;
+import com.example.vo.FileInfoVo;
 import com.example.vo.UserInfoVo;
 import org.junit.runner.RunWith;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.security.RunAs;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
-import java.util.logging.Handler;
 
 @ComponentScan
 @RunWith(SpringRunner.class)
@@ -43,6 +43,11 @@ public class Test {
     @Autowired
     private UserInfoDao userInfoDao;
 
+    @Autowired
+    private ShareFileController shareFileController;
+
+    @Autowired
+    private FileInfoDao dao;
     @org.junit.Test
     public void test1(){
         SystemFileInfoHashCode hashCode = new SystemFileInfoHashCode();
@@ -130,7 +135,29 @@ public class Test {
 
                     e.printStackTrace();
                 }
-            }
+    }
 
+
+    //实验成功
+    @org.junit.Test
+    public void test6() {
+        UserInfoVo userInfoVo =userInfoDao.findByUsername("江德鸿");
+        FileInfoVo fileInfoVo = service.findAll().get(0);
+        service.sharedAndLikes(userInfoVo,fileInfoVo);
+    }
+
+    @org.junit.Test
+    public void test7() {
+        UserInfoVo userInfoVo =userInfoDao.findByUsername("江德鸿");
+        FileInfoVo fileInfoVo = service.findAll().get(1);
+        service.sharedAndLikes(userInfoVo,fileInfoVo);
+    }
+    @org.junit.Test
+    public void test8() {
+        System.out.println(service.findAllShareFilePage(1, 3));
+    }
+    public void test9() {
+        System.out.println(shareFileController.page(1,3));
+    }
 
 }

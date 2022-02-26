@@ -1,65 +1,167 @@
-2021-11-03 00:03:58.528  INFO 3716 --- [main] com.example.Application                  : Starting Application on JJ with PID 3716 (C:\Users\DoYou\Desktop\wenjianguanli\target\classes started by DoYou in C:\Users\DoYou\Desktop\wenjianguanli)
-2021-11-03 00:03:58.550  INFO 3716 --- [main] com.example.Application                  : No active profile set, falling back to default profiles: default
-2021-11-03 00:04:00.516  WARN 3716 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.example]' package. Please check your configuration.
-2021-11-03 00:04:00.668  INFO 3716 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2021-11-03 00:04:00.691  INFO 3716 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
-2021-11-03 00:04:00.771  INFO 3716 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 23ms. Found 0 repository interfaces.
-2021-11-03 00:04:01.129  INFO 3716 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$de5fa88e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-11-03 00:04:01.145  INFO 3716 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.common.config.RedisConfig$$EnhancerBySpringCGLIB$$e36c9d56] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-11-03 00:04:01.870  INFO 3716 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8086 (http)
-2021-11-03 00:04:01.903  INFO 3716 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-11-03 00:04:01.903  INFO 3716 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.12
-2021-11-03 00:04:01.910  INFO 3716 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [I:\Program Files (x86)\jdk8\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;I:\Program\WINDOWS.X64_193000_db_home\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;i:\Program Files\Git\cmd;C:\TDM-GCC-64\bin;C:\Program Files (x86)\NetSarang\Xshell 7\;I:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;I:\python3.8.1\Scripts;I:\Program Files\erl-24.0\bin;I:\Program Files\Microsoft VS Code\bin;I:\python3.8.1;C:\Users\DoYou\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\IntelliJ IDEA 2020.1\bin;I:\Program Files\AndroidSDK\platform-tools;C:\Program Files\JetBrains\IntelliJ IDEA 2020.1\bin;;C:\Users\DoYou\AppData\Local\Microsoft\WindowsApps;I:\Program\apache-maven-3.5.0\bin;I:\Program Files (x86)\jdk8\bin;I:\Program\MongoDB\data\bin;I:\Program Files\JetBrains\PyCharm 2021.1.1\bin;;C:\Users\DoYou\AppData\Roaming\npm;;C:\Program Files\Huawei\DevEco Studio 2.1.0.501\bin;;.]
-2021-11-03 00:04:02.107  INFO 3716 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-11-03 00:04:02.107  INFO 3716 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3448 ms
-2021-11-03 00:04:02.693  INFO 3716 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
-2021-11-03 00:04:02.693  INFO 3716 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'sessionRepositoryFilter' to: [/*]
-2021-11-03 00:04:02.694  INFO 3716 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
-2021-11-03 00:04:02.694  INFO 3716 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'formContentFilter' to: [/*]
-2021-11-03 00:04:02.694  INFO 3716 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
-2021-11-03 00:04:02.694  INFO 3716 --- [main] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
-2021-11-03 00:04:04.205  INFO 3716 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
-2021-11-03 00:04:04.424  INFO 3716 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-11-03 00:04:05.094  INFO 3716 --- [main] io.lettuce.core.EpollProvider            : Starting without optional epoll library
-2021-11-03 00:04:05.095  INFO 3716 --- [main] io.lettuce.core.KqueueProvider           : Starting without optional kqueue library
-2021-11-03 00:04:05.965  INFO 3716 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2021-11-03 00:04:06.005  INFO 3716 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2021-11-03 00:04:06.075  INFO 3716 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2021-11-03 00:04:06.240  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAuthorityInfoUsingGET_1
-2021-11-03 00:04:06.326  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: registerUsingPOST_1
-2021-11-03 00:04:06.361  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: addUsingPOST_1
-2021-11-03 00:04:06.366  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: allUsingGET_1
-2021-11-03 00:04:06.369  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteUsingDELETE_1
-2021-11-03 00:04:06.373  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: detailUsingGET_1
-2021-11-03 00:04:06.385  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: pageUsingGET_1
-2021-11-03 00:04:06.389  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateUsingPUT_1
-2021-11-03 00:04:06.419  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadUsingPOST_1
-2021-11-03 00:04:06.431  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: addUsingPOST_2
-2021-11-03 00:04:06.437  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: allUsingGET_2
-2021-11-03 00:04:06.440  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteUsingDELETE_2
-2021-11-03 00:04:06.444  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: detailUsingGET_2
-2021-11-03 00:04:06.448  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getExcelModelUsingGET_1
-2021-11-03 00:04:06.458  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: pageUsingGET_2
-2021-11-03 00:04:06.461  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateUsingPUT_2
-2021-11-03 00:04:06.464  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadUsingPOST_2
-2021-11-03 00:04:06.473  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: addUsingPOST_3
-2021-11-03 00:04:06.481  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: allUsingGET_3
-2021-11-03 00:04:06.485  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteUsingDELETE_3
-2021-11-03 00:04:06.491  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: detailUsingGET_3
-2021-11-03 00:04:06.494  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getExcelModelUsingGET_2
-2021-11-03 00:04:06.503  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: pageUsingGET_3
-2021-11-03 00:04:06.516  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: registerUsingPOST_2
-2021-11-03 00:04:06.526  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateUsingPUT_3
-2021-11-03 00:04:06.529  INFO 3716 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadUsingPOST_3
-2021-11-03 00:04:07.175  INFO 3716 --- [main] s.a.ScheduledAnnotationBeanPostProcessor : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
-2021-11-03 00:04:07.270  INFO 3716 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8086 (http) with context path ''
-2021-11-03 00:04:07.274  INFO 3716 --- [main] com.example.Application                  : Started Application in 10.011 seconds (JVM running for 11.866)
-2021-11-03 00:04:44.162  INFO 3716 --- [http-nio-8086-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-11-03 00:04:44.163  INFO 3716 --- [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-11-03 00:04:44.169  INFO 3716 --- [http-nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
-2021-11-03 00:04:53.035  INFO 3716 --- [http-nio-8086-exec-8] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2021-11-03 00:04:53.380  INFO 3716 --- [http-nio-8086-exec-8] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2021-11-03 00:04:53.473  INFO 3716 --- [http-nio-8086-exec-9] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/index.html-调用Servlet
-2021-11-03 00:04:58.333  INFO 3716 --- [http-nio-8086-exec-8] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfo.html-调用Servlet
-2021-11-03 00:05:00.611  INFO 3716 --- [http-nio-8086-exec-4] c.e.controller.NxSystemFileController    : admin:当前下载数0
-2021-11-03 00:05:12.784  INFO 3716 --- [http-nio-8086-exec-6] c.e.controller.NxSystemFileController    : admin:当前下载数0
+2022-02-22 14:15:45.112  INFO 17644 --- [main] com.example.Application                  : Starting Application on JJ with PID 17644 (C:\Users\DoYou\Desktop\wenjianguanli\target\classes started by DoYou in C:\Users\DoYou\Desktop\wenjianguanli)
+2022-02-22 14:15:45.117  INFO 17644 --- [main] com.example.Application                  : No active profile set, falling back to default profiles: default
+2022-02-22 14:15:46.717  WARN 17644 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.example]' package. Please check your configuration.
+2022-02-22 14:15:46.775  INFO 17644 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-02-22 14:15:46.779  INFO 17644 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2022-02-22 14:15:46.827  INFO 17644 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 32ms. Found 0 repository interfaces.
+2022-02-22 14:15:47.245  INFO 17644 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$df26983d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-02-22 14:15:47.260  INFO 17644 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [com.example.common.config.RedisConfig$$EnhancerBySpringCGLIB$$e4338d05] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-02-22 14:15:47.710  INFO 17644 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
+2022-02-22 14:15:47.730  INFO 17644 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-02-22 14:15:47.730  INFO 17644 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.12
+2022-02-22 14:15:47.735  INFO 17644 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [I:\Program Files (x86)\jdk8\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;I:\Program\WINDOWS.X64_193000_db_home\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;i:\Program Files\Git\cmd;C:\TDM-GCC-64\bin;C:\Program Files (x86)\NetSarang\Xshell 7\;I:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;I:\python3.8.1\Scripts;I:\Program Files\erl-24.0\bin;I:\Program Files\Microsoft VS Code\bin;I:\python3.8.1;I:\Program\MATLAB\Polyspace\R2020a\runtime\win64;I:\Program\MATLAB\Polyspace\R2020a\bin;I:\Program\MATLAB\Polyspace\R2020a\polyspace\bin;C:\Users\DoYou\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\IntelliJ IDEA 2020.1\bin;I:\Program Files\AndroidSDK\platform-tools;C:\Program Files\JetBrains\IntelliJ IDEA 2020.1\bin;;C:\Users\DoYou\AppData\Local\Microsoft\WindowsApps;I:\Program\apache-maven-3.5.0\bin;I:\Program Files (x86)\jdk8\bin;I:\Program\MongoDB\data\bin;I:\Program Files\JetBrains\PyCharm 2021.1.1\bin;;C:\Users\DoYou\AppData\Roaming\npm;;C:\Program Files\Huawei\DevEco Studio 2.1.0.501\bin;;.]
+2022-02-22 14:15:47.924  INFO 17644 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-02-22 14:15:47.924  INFO 17644 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2735 ms
+2022-02-22 14:15:48.334  INFO 17644 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2022-02-22 14:15:48.335  INFO 17644 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'sessionRepositoryFilter' to: [/*]
+2022-02-22 14:15:48.335  INFO 17644 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2022-02-22 14:15:48.335  INFO 17644 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'formContentFilter' to: [/*]
+2022-02-22 14:15:48.336  INFO 17644 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2022-02-22 14:15:48.336  INFO 17644 --- [main] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
+2022-02-22 14:15:48.426  INFO 17644 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2022-02-22 14:15:48.587  INFO 17644 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2022-02-22 14:15:49.617  INFO 17644 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2022-02-22 14:15:49.859  INFO 17644 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-02-22 14:15:50.391  INFO 17644 --- [main] io.lettuce.core.EpollProvider            : Starting without optional epoll library
+2022-02-22 14:15:50.392  INFO 17644 --- [main] io.lettuce.core.KqueueProvider           : Starting without optional kqueue library
+2022-02-22 14:15:51.476  INFO 17644 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2022-02-22 14:15:51.492  INFO 17644 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2022-02-22 14:15:51.547  INFO 17644 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2022-02-22 14:15:51.654  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAuthorityInfoUsingGET_1
+2022-02-22 14:15:51.733  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: registerUsingPOST_1
+2022-02-22 14:15:51.754  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: addUsingPOST_1
+2022-02-22 14:15:51.758  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: allUsingGET_1
+2022-02-22 14:15:51.762  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteUsingDELETE_1
+2022-02-22 14:15:51.766  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: detailUsingGET_1
+2022-02-22 14:15:51.775  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: pageUsingGET_1
+2022-02-22 14:15:51.780  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateUsingPUT_1
+2022-02-22 14:15:51.799  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadUsingPOST_1
+2022-02-22 14:15:51.805  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: addUsingPOST_2
+2022-02-22 14:15:51.809  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: allUsingGET_2
+2022-02-22 14:15:51.811  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteUsingDELETE_2
+2022-02-22 14:15:51.814  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: detailUsingGET_2
+2022-02-22 14:15:51.816  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getExcelModelUsingGET_1
+2022-02-22 14:15:51.821  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: pageUsingGET_2
+2022-02-22 14:15:51.823  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateUsingPUT_2
+2022-02-22 14:15:51.825  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadUsingPOST_2
+2022-02-22 14:15:51.831  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: addUsingPOST_3
+2022-02-22 14:15:51.835  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: allUsingGET_3
+2022-02-22 14:15:51.838  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteUsingDELETE_3
+2022-02-22 14:15:51.840  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: detailUsingGET_3
+2022-02-22 14:15:51.843  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getExcelModelUsingGET_2
+2022-02-22 14:15:51.847  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: pageUsingGET_3
+2022-02-22 14:15:51.851  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: registerUsingPOST_2
+2022-02-22 14:15:51.853  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateUsingPUT_3
+2022-02-22 14:15:51.856  INFO 17644 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadUsingPOST_3
+2022-02-22 14:15:52.465  INFO 17644 --- [main] s.a.ScheduledAnnotationBeanPostProcessor : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2022-02-22 14:15:52.485  INFO 17644 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
+2022-02-22 14:15:52.487  INFO 17644 --- [main] com.example.Application                  : Started Application in 8.23 seconds (JVM running for 10.22)
+2022-02-22 14:17:07.736  INFO 17644 --- [http-nio-80-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-02-22 14:17:07.737  INFO 17644 --- [http-nio-80-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-02-22 14:17:07.744  INFO 17644 --- [http-nio-80-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2022-02-22 14:17:12.321  INFO 17644 --- [http-nio-80-exec-4] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/index.html-调用Servlet
+2022-02-22 14:17:34.891  INFO 17644 --- [http-nio-80-exec-1] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfo.html-调用Servlet
+2022-02-22 14:17:38.418  INFO 17644 --- [http-nio-80-exec-9] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/accountAdminInfo.html-调用Servlet
+2022-02-22 14:18:16.682  INFO 17644 --- [http-nio-80-exec-8] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfo.html-调用Servlet
+2022-02-22 14:19:30.218  INFO 17644 --- [http-nio-80-exec-10] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/accountUserInfo.html-调用Servlet
+2022-02-22 14:19:46.826  INFO 17644 --- [http-nio-80-exec-3] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfo.html-调用Servlet
+2022-02-22 16:03:32.110  WARN 17644 --- [redisMessageListenerContainer-7] s.s.d.r.RedisOperationsSessionRepository : Unable to publish SessionDestroyedEvent for session 4d692090-a437-46b1-ad38-ed56c1018e52
+2022-02-22 16:04:28.225  INFO 17644 --- [http-nio-80-exec-7] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/index.html-调用Servlet
+2022-02-22 16:04:32.443  INFO 17644 --- [http-nio-80-exec-4] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/index.html-调用Servlet
+2022-02-22 16:04:33.455  INFO 17644 --- [http-nio-80-exec-2] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/index.html-调用Servlet
+2022-02-22 16:04:34.276  INFO 17644 --- [http-nio-80-exec-1] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/index.html-调用Servlet
+2022-02-22 16:04:38.316  INFO 17644 --- [http-nio-80-exec-8] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/index.html-调用Servlet
+2022-02-22 16:05:24.055  INFO 17644 --- [http-nio-80-exec-6] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/index.html-调用Servlet
+2022-02-22 16:07:33.054  INFO 17644 --- [http-nio-80-exec-2] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfo.html-调用Servlet
+2022-02-22 16:07:33.239 ERROR 17644 --- [http-nio-80-exec-2] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, lastPacketReceivedIdleMillis : 127063
+2022-02-22 16:07:33.241 ERROR 17644 --- [http-nio-80-exec-1] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, lastPacketReceivedIdleMillis : 127060
+2022-02-22 16:07:39.174  INFO 17644 --- [http-nio-80-exec-10] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfo.html-调用Servlet
+2022-02-22 16:07:46.864  INFO 17644 --- [http-nio-80-exec-8] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfo.html-调用Servlet
+2022-02-22 16:08:26.598  INFO 17644 --- [http-nio-80-exec-4] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/accountUserInfo.html-调用Servlet
+2022-02-22 16:08:27.662  INFO 17644 --- [http-nio-80-exec-4] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/accountUserInfo.html-调用Servlet
+2022-02-22 16:08:28.682  INFO 17644 --- [http-nio-80-exec-4] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfo.html-调用Servlet
+2022-02-22 16:08:41.446  INFO 17644 --- [http-nio-80-exec-3] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfo.html-调用Servlet
+2022-02-22 16:10:15.912  INFO 17644 --- [http-nio-80-exec-9] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfo.html-调用Servlet
+2022-02-22 16:10:16.083 ERROR 17644 --- [http-nio-80-exec-7] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, lastPacketReceivedIdleMillis : 94521
+2022-02-22 16:10:16.083 ERROR 17644 --- [http-nio-80-exec-5] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, lastPacketReceivedIdleMillis : 94522
+2022-02-22 16:10:17.468  INFO 17644 --- [http-nio-80-exec-6] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:10:18.237  INFO 17644 --- [http-nio-80-exec-3] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:10:18.855  INFO 17644 --- [http-nio-80-exec-6] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:10:20.484  INFO 17644 --- [http-nio-80-exec-3] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:10:21.029  INFO 17644 --- [http-nio-80-exec-6] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:10:21.604  INFO 17644 --- [http-nio-80-exec-8] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:10:24.157  INFO 17644 --- [http-nio-80-exec-6] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:11:40.282  INFO 17644 --- [http-nio-80-exec-3] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:11:40.417 ERROR 17644 --- [http-nio-80-exec-5] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, lastPacketReceivedIdleMillis : 75519
+2022-02-22 16:11:40.418 ERROR 17644 --- [http-nio-80-exec-5] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, lastPacketReceivedIdleMillis : 75521
+2022-02-22 16:11:44.174  INFO 17644 --- [http-nio-80-exec-5] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:11:44.790  INFO 17644 --- [http-nio-80-exec-9] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:11:45.177  INFO 17644 --- [http-nio-80-exec-2] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:11:47.854  INFO 17644 --- [http-nio-80-exec-9] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/index.html-调用Servlet
+2022-02-22 16:11:51.277  INFO 17644 --- [http-nio-80-exec-9] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/accountUserInfo.html-调用Servlet
+2022-02-22 16:12:23.262  INFO 17644 --- [http-nio-80-exec-7] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:12:25.294  INFO 17644 --- [http-nio-80-exec-6] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/index.html-调用Servlet
+2022-02-22 16:12:36.159  INFO 17644 --- [http-nio-80-exec-7] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/accountUserInfo.html-调用Servlet
+2022-02-22 16:12:51.615  INFO 17644 --- [http-nio-80-exec-6] com.example.common.config.MyInterceptor  : 用户：江德鸿-调用文件/end/page/accountUserInfo.html-调用Servlet
+2022-02-22 16:14:01.796 ERROR 17644 --- [http-nio-80-exec-4] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, lastPacketReceivedIdleMillis : 70080
+2022-02-22 16:14:01.797 ERROR 17644 --- [http-nio-80-exec-4] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, lastPacketReceivedIdleMillis : 128782
+2022-02-22 16:14:01.829  INFO 17644 --- [http-nio-80-exec-6] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/index.html-调用Servlet
+2022-02-22 16:14:12.396  INFO 17644 --- [http-nio-80-exec-3] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/index.html-调用Servlet
+2022-02-22 16:14:21.020  INFO 17644 --- [http-nio-80-exec-10] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:14:29.638  INFO 17644 --- [http-nio-80-exec-3] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfo.html-调用Servlet
+2022-02-22 16:14:37.291  INFO 17644 --- [http-nio-80-exec-9] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/typeInfo.html-调用Servlet
+2022-02-22 16:23:27.799  INFO 17644 --- [http-nio-80-exec-9] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/typeInfo.html-调用Servlet
+2022-02-22 16:23:27.910 ERROR 17644 --- [http-nio-80-exec-10] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, lastPacketReceivedIdleMillis : 528509
+2022-02-22 16:23:27.911 ERROR 17644 --- [http-nio-80-exec-10] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, lastPacketReceivedIdleMillis : 538162
+2022-02-22 16:23:28.357  INFO 17644 --- [http-nio-80-exec-7] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/typeInfo.html-调用Servlet
+2022-02-22 16:23:28.710  INFO 17644 --- [http-nio-80-exec-5] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/typeInfo.html-调用Servlet
+2022-02-22 16:23:30.419  INFO 17644 --- [http-nio-80-exec-1] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:23:31.252  INFO 17644 --- [http-nio-80-exec-8] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:23:44.244  INFO 17644 --- [http-nio-80-exec-2] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:23:48.687  INFO 17644 --- [http-nio-80-exec-3] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:01.805  INFO 17644 --- [http-nio-80-exec-9] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:03.565  INFO 17644 --- [http-nio-80-exec-8] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:04.210  INFO 17644 --- [http-nio-80-exec-4] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:04.659  INFO 17644 --- [http-nio-80-exec-8] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:04.833  INFO 17644 --- [http-nio-80-exec-4] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:05.016  INFO 17644 --- [http-nio-80-exec-8] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:06.070  INFO 17644 --- [http-nio-80-exec-4] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:06.454  INFO 17644 --- [http-nio-80-exec-6] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:06.659  INFO 17644 --- [http-nio-80-exec-8] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:07.043  INFO 17644 --- [http-nio-80-exec-6] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:07.419  INFO 17644 --- [http-nio-80-exec-9] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:07.635  INFO 17644 --- [http-nio-80-exec-1] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:08.740  INFO 17644 --- [http-nio-80-exec-10] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:09.375  INFO 17644 --- [http-nio-80-exec-1] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:09.862  INFO 17644 --- [http-nio-80-exec-6] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:10.073  INFO 17644 --- [http-nio-80-exec-1] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:10.279  INFO 17644 --- [http-nio-80-exec-6] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:11.057  INFO 17644 --- [http-nio-80-exec-1] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:12.008  INFO 17644 --- [http-nio-80-exec-6] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:12.733  INFO 17644 --- [http-nio-80-exec-1] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfo.html-调用Servlet
+2022-02-22 16:24:13.055  INFO 17644 --- [http-nio-80-exec-6] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/typeInfo.html-调用Servlet
+2022-02-22 16:24:13.719  INFO 17644 --- [http-nio-80-exec-2] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/userInfo.html-调用Servlet
+2022-02-22 16:24:14.078  INFO 17644 --- [http-nio-80-exec-8] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/adminInfo.html-调用Servlet
+2022-02-22 16:24:14.793  INFO 17644 --- [http-nio-80-exec-4] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:15.454  INFO 17644 --- [http-nio-80-exec-8] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:16.064  INFO 17644 --- [http-nio-80-exec-8] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:16.305  INFO 17644 --- [http-nio-80-exec-10] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:16.534  INFO 17644 --- [http-nio-80-exec-6] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:18.197  INFO 17644 --- [http-nio-80-exec-3] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:20.205  INFO 17644 --- [http-nio-80-exec-3] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:21.285  INFO 17644 --- [http-nio-80-exec-3] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:22.643  INFO 17644 --- [http-nio-80-exec-3] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:23.261  INFO 17644 --- [http-nio-80-exec-5] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:24.537  INFO 17644 --- [http-nio-80-exec-4] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/typeInfo.html-调用Servlet
+2022-02-22 16:24:25.326  INFO 17644 --- [http-nio-80-exec-8] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:24:26.505  INFO 17644 --- [http-nio-80-exec-6] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfo.html-调用Servlet
+2022-02-22 16:27:12.814  INFO 17644 --- [http-nio-80-exec-7] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:27:12.951 ERROR 17644 --- [http-nio-80-exec-9] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, lastPacketReceivedIdleMillis : 157616
+2022-02-22 16:27:12.952 ERROR 17644 --- [http-nio-80-exec-1] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, lastPacketReceivedIdleMillis : 166322
+2022-02-22 16:27:12.952 ERROR 17644 --- [http-nio-80-exec-9] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, lastPacketReceivedIdleMillis : 166322
+2022-02-22 16:33:14.250  INFO 17644 --- [http-nio-80-exec-9] com.example.common.config.MyInterceptor  : 用户：admin-调用文件/end/page/fileInfoAndComment.html-调用Servlet
+2022-02-22 16:33:14.447 ERROR 17644 --- [http-nio-80-exec-2] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, lastPacketReceivedIdleMillis : 360611
+2022-02-22 16:33:14.448 ERROR 17644 --- [http-nio-80-exec-2] c.a.druid.pool.DruidAbstractDataSource   : discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, jdbcUrl : jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8, lastPacketReceivedIdleMillis : 360612
+2022-02-22 16:35:40.450  INFO 17644 --- [Thread-15] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-02-22 16:35:40.452  INFO 17644 --- [Thread-15] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2022-02-22 16:35:40.479  INFO 17644 --- [Thread-15] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed

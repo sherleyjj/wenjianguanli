@@ -6,7 +6,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: kissme520
-    url: jdbc:mysql://localhost:3306/wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8
+    url: jdbc:mysql://localhost:3306/test_wenjianguanli?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8
     type: com.alibaba.druid.pool.DruidDataSource
 
   redis:
@@ -58,9 +58,9 @@ pagehelper:
   params: count=countSql
 
 authority:
-  info: '[{"models":[{"modelId":1,"operation":[1,2,3,4]},{"modelId":1000001,"operation":[1,2,3,4]},{"modelId":2,"operation":[1,2,3,4]},{"modelId":3,"operation":[1,2,3,4]},{"modelId":4,"operation":[1,2,3,4]},{"modelId":5,"operation":[1,2,3,4]}],"level":1,"modelId":1,"name":"管理员"},{"models":[{"modelId":4,"operation":[4,1,2,3]}],"level":2,"modelId":2,"name":"用户"}]'
+  info: '[{"models":[{"modelId":1,"operation":[1,2,3,4,5]},{"modelId":1000001,"operation":[1,2,3,4,5]},{"modelId":2,"operation":[1,2,3,4,5]},{"modelId":3,"operation":[1,2,3,4,5]},{"modelId":4,"operation":[1,2,3,4,5]},{"modelId":5,"operation":[1,2,3,4,5]}],"level":1,"modelId":1,"name":"管理员"},{"models":[{"modelId":4,"operation":[4,1,2,3,5]}],"level":2,"modelId":2,"name":"用户"}]'
 
-logging:
-  file: log/my.log
+#logging:
+#  file: log/my.log
 
 debug: false
