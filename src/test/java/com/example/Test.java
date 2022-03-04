@@ -9,8 +9,10 @@ import com.example.dao.FileInfoDao;
 import com.example.dao.UserInfoDao;
 import com.example.entity.NxSystemFileInfo;
 import com.example.entity.SystemFileInfoHashCode;
+import com.example.service.CommentService;
 import com.example.service.FileInfoService;
 import com.example.service.NxSystemFileInfoService;
+import com.example.to.CommentTo;
 import com.example.to.ShareFileTo;
 import com.example.vo.FileInfoVo;
 import com.example.vo.UserInfoVo;
@@ -48,6 +50,10 @@ public class Test {
 
     @Autowired
     private FileInfoDao dao;
+    @Autowired
+    private CommentService commentService;
+
+
     @org.junit.Test
     public void test1(){
         SystemFileInfoHashCode hashCode = new SystemFileInfoHashCode();
@@ -158,6 +164,27 @@ public class Test {
     }
     public void test9() {
         System.out.println(shareFileController.page(1,3));
+    }
+    @org.junit.Test
+    public void test10() {
+        CommentTo commentTo = new CommentTo();
+        commentTo.setComment("Hello");
+        commentTo.setFileId(87);
+        commentTo.setUserId(11);
+        commentService.addComment(commentTo);
+    }
+    @org.junit.Test
+    public void test11() {
+        CommentTo commentTo = new CommentTo();
+        commentTo.setComment("Hello");
+        commentTo.setFileId(87);
+        commentTo.setUserId(11);
+        commentService.deleteCommentById(1);
+    }
+    @org.junit.Test
+    public void test12() {
+
+        commentService.likes(13,11,2);
     }
 
 }

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.dao.ShareFileDao">
+    <insert id="shareFile">
+        insert into shared_file(filename,first_share_user_id,likes,fileid) values (#{param1.filename}
+                                                                                  ,#{param1.firstUserId},0,#{param1.fileid})
+    </insert>
+    <update id="updateSharelikes">
+        update shared_file set likes =#{likes} + 1 where fileid = #{fileid}
+    </update>
 
 
     <select id="selectByFileIDWithUser" resultType="com.example.vo.ShareFileVo">
@@ -10,7 +17,10 @@
         select   s.* , u.name username
         from  shared_file as s inner join user_info as u where  first_share_user_id = u.id
     </select>
-<!--    s.filename,s.first_share_user_id  firstUserId,s.share_date  shareDate,s.fileid ,u.name userName-->
+    <select id="isSharedByFileId" resultType="java.lang.Integer">
+        select count(*) from shared_file where fileid = #{fileid}
+    </select>
+    <!--    s.filename,s.first_share_user_id  firstUserId,s.share_date  shareDate,s.fileid ,u.name userName-->
     <resultMap id="sharefileMap" type="com.example.vo.ShareFileVo">
         <result column="filename"  property="filename"></result>
         <result column="first_share_user_id"  property="firstUserId"/>

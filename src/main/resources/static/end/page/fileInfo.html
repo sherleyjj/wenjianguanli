@@ -148,7 +148,7 @@
                                     </td>
                                     <td>
 <!--                                        TODO 完成分享功能前端-->
-                                        <button class="btn btn-primary btn-xs" @click="">共享到大厅</button>
+                                        <button class="btn btn-primary btn-xs" @click="sharefile(obj)">共享到大厅</button>
                                         <button class="btn btn-primary btn-xs" @click="init(obj)">更新</button>
                                         <button class="btn btn-success btn-xs" @click="del(obj.id)">删除</button>
                                     </td>
@@ -330,6 +330,20 @@
 
         },
         methods: {
+            sharefile:function (obj){
+
+                console.log(obj)
+                var value = new Object()
+                value.firstUserId = obj.uploadUserId
+                value.filename = obj.fileName
+                value.fileid = obj.fileId
+                console.log(value)
+               axios.post("/share/up",value).then(res=>{
+                   console.log(res)
+               })
+
+
+            },
             loadTable(pageNum) {
                 let name = this.name === '' ? "all" : this.name;
                 let typeId = this.typeId;
