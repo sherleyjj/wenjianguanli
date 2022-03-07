@@ -3,9 +3,15 @@
 <mapper namespace="com.example.dao.CommentDao">
 
 
+<!--    是通过反射设置的Id值-->
     <insert id="addComment">
+
+        <selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
+            select LAST_INSERT_ID() as id
+        </selectKey>
         insert into user_comment(user_id,share_file_id,comment,is_ai_checked,
                                  ai_checked_score,is_administrator_checked,administrator_checked_score,likes)
                                  values (#{userId},#{fileId},#{comment},0,0,0,0,0)
+
     </insert>
 </mapper>

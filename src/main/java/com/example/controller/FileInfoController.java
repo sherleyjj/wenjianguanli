@@ -66,13 +66,14 @@ public class FileInfoController {
         return Result.success(fileInfoService.findAll());
     }
 
-    @GetMapping("/page/{name}/{typeId}")
+    @GetMapping("/page/{name}/{typeId}/{userId}")
     public Result<PageInfo<FileInfoVo>> page(@PathVariable String name,
                                              @PathVariable Long typeId,
+                                             @PathVariable Integer userId,
                                              @RequestParam(defaultValue = "1") Integer pageNum,
                                              @RequestParam(defaultValue = "5") Integer pageSize,
                                              HttpServletRequest request) {
-        return Result.success(fileInfoService.findPage(name, typeId, pageNum, pageSize));
+        return Result.success(fileInfoService.findPage(name, typeId, pageNum, pageSize,userId));
     }
 
     @GetMapping("/hashcode/{code}")

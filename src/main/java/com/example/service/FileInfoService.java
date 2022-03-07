@@ -42,7 +42,7 @@ public class FileInfoService {
      */
     public int delete(Long id) {
 
-        List<FileInfoVo> fileInfos = fileInfoDao.findByNameAndId(null,null,id);
+        List<FileInfoVo> fileInfos = fileInfoDao.findByNameAndId(null,null,id,null);
         Long file_id = fileInfos.get(0).getFileId();
         int ref = fileInfoDao.selectFileRefernce(file_id);
         if (ref >1){
@@ -59,7 +59,7 @@ public class FileInfoService {
     }
 
     public FileInfoVo findById(Long id) {
-        List<FileInfoVo> list = fileInfoDao.findByNameAndId(null, null,  id);
+        List<FileInfoVo> list = fileInfoDao.findByNameAndId(null, null,  id,null);
         if (!CollectionUtil.isEmpty(list)) {
             return list.get(0);
         }
@@ -67,12 +67,12 @@ public class FileInfoService {
     }
 
     public List<FileInfoVo> findAll() {
-        return fileInfoDao.findByNameAndId("all", null, null);
+        return fileInfoDao.findByNameAndId("all", null, null,null);
     }
 
-    public PageInfo<FileInfoVo> findPage(String name, Long typeId, Integer pageNum, Integer pageSize) {
+    public PageInfo<FileInfoVo> findPage(String name, Long typeId, Integer pageNum, Integer pageSize,Integer userId) {
         PageHelper.startPage(pageNum, pageSize);
-        List<FileInfoVo> info = fileInfoDao.findByNameAndId(name, typeId, null);
+        List<FileInfoVo> info = fileInfoDao.findByNameAndId(name, typeId, null,userId);
         return PageInfo.of(info);
     }
 

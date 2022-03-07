@@ -144,14 +144,13 @@
                                     <td>{{obj.likes}}</td>
                                     <td>{{obj.userName}}</td>
                                     <td>
-<!--                                        TODO 功能没有实现-->
-                                        <button class="btn btn-primary btn-xs" @click="test()">查看评论</button>
+                                        <button class="btn btn-primary btn-xs" @click="showComment(obj)">查看评论</button>
                                         <button class="btn btn-primary btn-xs" @click="viewModal(obj)">预览</button>
-                                        <button class="btn btn-success btn-xs" @click="downFile(obj.id)">下载</button>
+                                        <button class="btn btn-success btn-xs" @click="downFile(obj.fileId)">下载</button>
                                     </td>
                                     <td>
 <!--                                        <button class="btn btn-primary btn-xs" @click="init(obj)">更新</button>-->
-                                        <button class="btn btn-success btn-xs" @click="del(obj.id)">删除</button>
+                                        <button class="btn btn-success btn-xs" @click="del(obj.fileId,index)">删除</button>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -204,10 +203,10 @@
     </div>
 
 
-<!--    TODO  写好评论Modal-->
+
     <!--comment Modal -->
-    <div class="modal" tabindex="-1" role="dialog" id="commentMod">
-        <div class="modal-dialog" role="document">
+    <div class="modal " tabindex="-1" role="dialog" id="commentMod">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="modal-title">评论</span>
@@ -217,45 +216,35 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal">
-                        <input type="hidden" id="aa" name="id" v-model="entity.id">
-                        <input type="hidden" name="level" v-model="entity.level">
-                        <input type="hidden" name="userId" v-model="entity.userId">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">文件名称</label>
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control" v-model="entity.name" placeholder="请输入文件名称" id="ss">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">上传时间</label>
-                            <div class="col-sm-7">
-                                <div class="block">
-                                    <el-date-picker v-model="entity.time" id="time" type="datetime" clearable value-format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期时间"></el-date-picker>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" >
-                            <label class="col-sm-3 control-label">关联文件分类</label>
-                            <div class="col-sm-7">
-                                <select class="form-control" v-model="entity.typeId">
-                                    <option v-for="item in typeObjs" :value="item.id" name="typeId">{{item.name}}</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">上传文件</label>
-                            <div class="col-sm-7">
-                                <div style="margin-top: 8px">
-                                    <input id="cc" type="file" ref="file">
-                                </div>
-                            </div>
+<!--                            <label class="col-sm-3 control-label">文件名称</label>-->
+<!--                                <input type="text" class="form-control" v-model="entity.comment" placeholder="请输入内容" id="ss">-->
+                                <textarea class="form-control" v-model="entity.comment" placeholder="请输入内容" id="ss"></textarea>
                         </div>
                     </form>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <td class="col-sm-1">用户Id</td>
+                            <td>评论</td>
+                            <td class="col-sm-1">喜欢</td>
+                            <td class="col-sm-1"></td>
+                        </thead>
+                        <tbody>
+<!--                        TODO 修改显示内容 当然后台也需要更改
+-->
+                            <tr v-for="(obj,index) in sortCommentData" :key="obj.id">
+                                <td>{{obj.userId}}</td>
+                                <td>{{obj.comment}}</td>
+                                <td>{{obj.likes}}</td>
+                                <td><button class="btn btn-block btn-primary" v-on:click="like(obj,index)"><i class="fa fa-thumbs-up"></i>Like</button></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="isSameFileAndUpdate">提交</button>
+                    <button type="button" class="btn btn-primary"  v-on:click="submitComment()">提交</button>
                 </div>
             </div>
         </div>
@@ -271,9 +260,11 @@
 <script src="../js/vue2.6.11/vue.min.js"></script>
 <script src="../js/element/index.js"></script>
 <script src="../js/spark-md5.js"></script>
+<script src="../js/httpVueLoader.js"></script>
 <!--文件上传js-->
 <script>
     function msg(type, msg) {
+
         Vue.prototype.$message({
             type: type, // success（成功）、warning（警告）, error(错误)
             message: msg,
@@ -282,7 +273,6 @@
             center: true
         })
     }
-
     var vue = new Vue({
         el: '#wrapper',
         data: {
@@ -301,8 +291,10 @@
             preActive: true,
             nextActive: true,
             user: {},
-            md5s:[]
+            md5s:[],
+            commentData:[]
         },
+
         created: function () {
             this.user = JSON.parse(localStorage.getItem('user'));
             this.loadTable(1);
@@ -332,13 +324,18 @@
 			});
 
         },
+        computed:{
+            sortCommentData:function () {
+                return this.commentData;
+            }
+        },
         methods: {
             loadTable(pageNum) {
                 let name = this.name === '' ? "all" : this.name;
                 let typeId = this.typeId;
                 axios.get("/share/all/page/?pageNum=" + pageNum).then(res => {
                     if (res.data.code === '0') {
-                        this.tableData = res.data.data.list;
+                        this.tableData = {...res.data.data.list};
                         this.pageInfo = res.data.data;
                         this.preActive = !(this.pageInfo.hasPreviousPage);
                         this.nextActive = !(this.pageInfo.hasNextPage);
@@ -348,46 +345,65 @@
                     console.log(this.tableData);
                 });
             },
-            test:function (){
-                //modal是默认不可见的
-                $("#testmodal").modal('show');
-            },
-            isSameFileAndUpdate:function(){
-                var md5s = [];
-                let files = this.$refs.file.files;
-                for (let i = 0; i < files.length; i++) {
-                    const fileReader = new FileReader();
-                    fileReader.readAsBinaryString(files[i])
-                    fileReader.onload = e => {
-                        md5s[i] = SparkMD5.hashBinary(e.target.result);
-                        axios.get('/files/isexist/'+md5s[0]).then(res => {
-                            console.log(res.data)
-                            if (res.data.data.exist === true){
-                                //卡在这儿了，需要entity数据 提供给update函数
-                                this.entity.fileId = res.data.data.id;
-                                this.entity.fileName = res.data.data.originName;
-                                msg('success','秒传成功')
-                                this.update();
-                            }else{
-                                this.upload(0,md5s[0]);
-                            }
-                        })
+            showComment:function (obj){
+                this.entity.userId = obj.firstUserId;
+                this.entity.fileId = obj.fileId;
+
+                axios.get("/comment/get/"+obj.fileId).then(res=>{
+                    if (res.data.code === '0'){
+                        this.commentData = res.data.data;
+                    }else{
+                        msg('error',res.data.msg);
                     }
-                }
+                })
+
+                //modal是默认不可见的
+                $("#commentMod").modal('show');
+            },
+            like:function (obj,index){
+                value = new Object()
+                value.likeId = this.user.id
+                value.likedId = obj.userId
+                value.commentId = obj.id
+                console.log(value)
+                axios.get("/comment/like/"+value.likeId+"/"+value.likedId+"/"+value.commentId).then(res=>{
+                    if (res.data.code === '0'){
+                        if (res.data.data === 1){
+                            this.commentData[index].likes +=1
+                            msg("success","点赞成功")
+                        }else{
+                            this.commentData[index].likes -=1
+                            msg("success","取消点赞")
+                        }
+                        // this.commentData.sort();
+                    }else{
+                        msg("error","系统错误")
+                    }
+
+                })
 
             },
-            // calculateMd5:function (){
-            //     let files = this.$refs.file.files;
-            //     for (let i = 0; i < files.length; i++) {
-            //         const fileReader = new FileReader();
-            //         fileReader.readAsBinaryString(files[i])
-            //         fileReader.onload = e => {
-            //             this.md5s[i] = SparkMD5.hashBinary(e.target.result);
-            //             console.log(this.md5s[0])
-            //         }
-            //     }
-            //     return this.md5s;
-            // },
+            submitComment:function(){
+                this.entity.likes = 0
+                value = {...this.entity}
+                if (this.entity.comment === undefined){
+                    msg('error',"评论不能为空")
+                    return;
+                }
+                axios.post("/comment/add",this.entity).then(res=>{
+                    if (res.data.code === '0'){
+
+                        value.id = res.data.data
+                        //TODO 需要返回commentId
+                        msg('success',"评论成功")
+
+                        this.commentData.push(value)
+                        // this.loadTable(1)
+                    }else{
+                        msg('error',res.data.msg);
+                    }
+                })
+            },
             upload: function (index,hash) {
                 console.log("真实上传文件被调用")
                 let files = this.$refs.file.files;
@@ -409,11 +425,12 @@
                 })
             },
             viewModal: function (data) {
-                axios.get("/fileInfo/" + data.id).then(res => {
+                //id应该为fileinfo的id
+                axios.get("/files/" + data.fileId).then(res => {
                     if (res.data.code === '0') {
                         let info = res.data.data;
-                        this. url = '/files/download/' + res.data.data.fileId;
-                        if (/\.(png|jpg|gif|jpeg|webp)$/.test(info.fileName)) {
+                        this. url = '/files/download/' + data.fileId;
+                        if (/\.(png|jpg|gif|jpeg|webp)$/.test(info.originName)) {
                             this.imgShow = true;
                             this.videoShow = false;
 
@@ -430,7 +447,7 @@
                                     $('#view-img').css('width', width + 'px').css('height', '270px');
                                 }
                             };
-                        } else if (/\.mp4$/.test(info.fileName)) {
+                        } else if (/\.mp4$/.test(info.originName)) {
                             this.imgShow = false;
                             this.videoShow = true;
                         } else {
@@ -450,13 +467,14 @@
                 }
             },
             downFile: function (id) {
-                axios.get("/fileInfo/" + id).then(res => {
-                    if (res.data.code === '0') {
-                        location.href = '/files/download/' + res.data.data.fileId;
-                    } else {
-                        msg('error', res.data.msg);
-                    }
-                });
+                // axios.get("/fileInfo/" + id).then(res => {
+                //     if (res.data.code === '0') {
+                //         location.href = '/files/download/' + res.data.data.fileId;
+                //     } else {
+                //         msg('error', res.data.msg);
+                //     }
+                // });
+                location.href = '/files/download/' + id;
             },
             init(o) {
                 console.log(this.permission)
@@ -503,10 +521,13 @@
                     }
                 }
             },
-            del: function (id) {
+            del: function (fileId,index) {
+                //不是管理员，或者不是分享用户没有权限
                 if (this.permission.indexOf(2) === -1) {
-                    msg('warning', '你没有权限进行该操作');
-                    return;
+                    if (this.tableData[index].firstUserId !== this.user.id){
+                        msg('warning', '你没有权限进行该操作');
+                        return;
+                    }
                 }
                 let _this = this;
                 this.$confirm('确认删除？', '系统提示', {
@@ -515,7 +536,7 @@
                     cancelButtonClass: 'btn-custom-cancel',
                     type: 'warning'
                 }).then(function(){
-                    axios.delete("/fileInfo/" + id).then(res => {
+                    axios.delete("/share/delete/" + fileId).then(res => {
                         if (res.data.code === '0') {
                             msg('success','文件删除成功');
                             _this.loadTable(1);

@@ -1,12 +1,10 @@
 package com.example.controller;
 
 import com.example.common.Result;
-import com.example.entity.ShareFile;
 import com.example.pojo.SharedOrLikes;
 import com.example.service.FileInfoService;
 import com.example.service.ShareFileService;
 import com.example.vo.ShareFileVo;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +29,18 @@ public class ShareFileController {
 
     @PostMapping("/up")
     public Result<SharedOrLikes> share(@RequestBody ShareFileVo shareFileVo){
-        if (shareFileVo.getFileid() == null || shareFileVo.getFilename() == null || shareFileVo.getFirstUserId() == null)
+        if (shareFileVo.getFileId() == null || shareFileVo.getFilename() == null || shareFileVo.getFirstUserId() == null)
             return Result.error("502","重要属性不存在");
         return Result.success(shareFileService.sharedOrLikesSimple(shareFileVo));
+    }
+
+    @GetMapping("/delete/{fileId}")
+    public Result delete(@PathVariable Integer fileId){
+        int res = shareFileService.delete(fileId);
+        if (res ==0){
+            return Result.error(Result.error().getCode(), "删除失败");
+        }
+        return Result.success(res);
     }
 
 }

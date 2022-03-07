@@ -3,10 +3,10 @@
 <mapper namespace="com.example.dao.ShareFileDao">
     <insert id="shareFile">
         insert into shared_file(filename,first_share_user_id,likes,fileid) values (#{param1.filename}
-                                                                                  ,#{param1.firstUserId},0,#{param1.fileid})
+                                                                                  ,#{param1.firstUserId},0,#{param1.fileId})
     </insert>
     <update id="updateSharelikes">
-        update shared_file set likes =#{likes} + 1 where fileid = #{fileid}
+        update shared_file set likes =#{likes} + 1 where fileid = #{fileId}
     </update>
 
 
@@ -27,7 +27,7 @@
         <result column="share_date" property="shareDate"/>
         <result column="username" property="userName"/>
         <result column="likes" property="likes"/>
-        <result column="fileid" property="fileid"/>
+        <result column="fileid" property="fileId"/>
         <result column="id" property="id"/>
     </resultMap>
 </mapper>

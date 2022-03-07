@@ -147,7 +147,6 @@
                                         <button class="btn btn-success btn-xs" @click="downFile(obj.id)">下载</button>
                                     </td>
                                     <td>
-<!--                                        TODO 完成分享功能前端-->
                                         <button class="btn btn-primary btn-xs" @click="sharefile(obj)">共享到大厅</button>
                                         <button class="btn btn-primary btn-xs" @click="init(obj)">更新</button>
                                         <button class="btn btn-success btn-xs" @click="del(obj.id)">删除</button>
@@ -335,19 +334,25 @@
                 console.log(obj)
                 var value = new Object()
                 value.firstUserId = obj.uploadUserId
-                value.filename = obj.fileName
-                value.fileid = obj.fileId
+                value.filename = obj.name
+                value.fileId = obj.fileId
                 console.log(value)
-               axios.post("/share/up",value).then(res=>{
+                axios.post("/share/up",value).then(res=>{
+                    if(res.status === 200 ){
+                        if (res.data.data === "Like"){
+                            msg("success","点赞成功")
+                        }else{
+                            msg("success","分享成功")
+                        }
+                    }
                    console.log(res)
-               })
-
-
+                })
             },
+            //应该只加载自己的文件
             loadTable(pageNum) {
                 let name = this.name === '' ? "all" : this.name;
                 let typeId = this.typeId;
-                axios.get("/fileInfo/page/" + name + "/" + typeId + "?pageNum=" + pageNum).then(res => {
+                axios.get("/fileInfo/page/" + name + "/" + typeId+"/"+this.user.id + "?pageNum=" + pageNum).then(res => {
                     if (res.data.code === '0') {
                         this.tableData = res.data.data.list;
                         this.pageInfo = res.data.data;
@@ -382,18 +387,6 @@
                 }
 
             },
-            // calculateMd5:function (){
-            //     let files = this.$refs.file.files;
-            //     for (let i = 0; i < files.length; i++) {
-            //         const fileReader = new FileReader();
-            //         fileReader.readAsBinaryString(files[i])
-            //         fileReader.onload = e => {
-            //             this.md5s[i] = SparkMD5.hashBinary(e.target.result);
-            //             console.log(this.md5s[0])
-            //         }
-            //     }
-            //     return this.md5s;
-            // },
             upload: function (index,hash) {
                 console.log("真实上传文件被调用")
                 let files = this.$refs.file.files;

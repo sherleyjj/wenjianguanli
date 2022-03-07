@@ -30,6 +30,7 @@ public class CommentService {
     public List<Comment> selectAllCommentByFileId(CommentTo commentTo){
         Example example = new Example(Comment.class);
         example.createCriteria().andCondition("share_file_id=",commentTo.getFileId());
+        example.orderBy("likes").desc();
         return commentDao.selectByExample(example);
     }
     public int deleteCommentById(Integer commentId){
@@ -43,10 +44,11 @@ public class CommentService {
      * @param likeId
      * @param likedId
      * @param commentId
-     * @return 0 代表点赞失败了
+     * @return 0 代表点赞失败了,1为点赞，-1为取消点赞
      */
     @Transactional
     public int likes(Integer likeId,Integer likedId,Integer commentId){
+        int flag;
         JSONObject jsonObject = new JSONObject().set("likeId",likeId);
         jsonObject.set("likedId",likedId);
         jsonObject.set("commentId",commentId);
@@ -65,12 +67,16 @@ public class CommentService {
                   return 0;
               }
             comment.setLikes(comment.getLikes()-1);
+              flag = -1;
         }else {
             comment.setLikes(comment.getLikes()+1);
 //            like.add(jsonObject.toString());
             redisUtil.sSet(LIKE_SET_NAME,jsonObject.toString());
+            flag = 1;
         }
-        return commentDao.updateByExample(comment, new Example(Comment.class));
-
+        Example example2 = new Example(Comment.class);
+        example2.createCriteria().andCondition("id="+commentId);
+        commentDao.updateByExample(comment, example2);
+        return flag;
     }
 }

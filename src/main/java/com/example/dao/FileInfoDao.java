@@ -16,7 +16,8 @@ import java.util.List;
 public interface FileInfoDao extends Mapper<FileInfo> {
     List<FileInfoVo> findByNameAndId(@Param("name") String name,
                                      @Param("typeId") Long typeId,
-                                     @Param("id") Long id);
+                                     @Param("id") Long id,
+                                     @Param("userId")Integer userId);
     HashFileInfoVo isExistFileByHashCode(@Param("hashcode")String hashCode);
 
    /*

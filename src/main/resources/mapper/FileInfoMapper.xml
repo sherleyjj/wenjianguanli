@@ -38,6 +38,9 @@
         <if test="id != null and id != 0">
             and `file_info`.`id` = #{id}
         </if>
+        <if test="userId != null and userId !=0">
+            and `file_info`.`uploadUserId` = #{userId}
+        </if>
         order by `file_info`.`id`
     </select>
     <select id="isExistFileByHashCode" resultType="com.example.vo.HashFileInfoVo">

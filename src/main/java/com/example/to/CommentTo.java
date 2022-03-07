@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 public class CommentTo {
 
+    private Integer id;
     private Integer userId;
     private Integer fileId;
     private String comment;

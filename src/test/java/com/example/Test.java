@@ -1,12 +1,11 @@
 package com.example;
 
+import com.example.common.Result;
 import com.example.common.until.BigHeap;
-import com.example.controller.FileInfoController;
-import com.example.controller.NxSystemFileController;
-import com.example.controller.ShareFileController;
-import com.example.controller.UserInfoController;
+import com.example.controller.*;
 import com.example.dao.FileInfoDao;
 import com.example.dao.UserInfoDao;
+import com.example.entity.Account;
 import com.example.entity.NxSystemFileInfo;
 import com.example.entity.SystemFileInfoHashCode;
 import com.example.service.CommentService;
@@ -21,7 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
@@ -53,6 +54,10 @@ public class Test {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private CommentController commentController;
+    @Autowired
+    private HttpSession httpSession;
 
     @org.junit.Test
     public void test1(){
@@ -169,9 +174,11 @@ public class Test {
     public void test10() {
         CommentTo commentTo = new CommentTo();
         commentTo.setComment("Hello");
-        commentTo.setFileId(87);
+        commentTo.setFileId(88);
         commentTo.setUserId(11);
-        commentService.addComment(commentTo);
+        for (int i = 0; i < 2; i++) {
+            commentService.addComment(commentTo);
+        }
     }
     @org.junit.Test
     public void test11() {
@@ -185,6 +192,11 @@ public class Test {
     public void test12() {
 
         commentService.likes(13,11,2);
+    }
+    //测试分享文件删除,以及评论删除
+    @org.junit.Test
+    public void test13() {
+        shareFileController.delete(88);
     }
 
 }

@@ -1,12 +1,8 @@
 package com.example.entity;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.Date;
 
 @Table(name = "shared_file")
 @Data
@@ -23,7 +19,7 @@ public class ShareFile {
     @Column(name = "share_date")
     private String shareDate;
     @Column(name = "fileid")
-    private Integer fileid;
+    private Integer fileId;
 
     //可行
     public void setShareDate(String shareDate) {

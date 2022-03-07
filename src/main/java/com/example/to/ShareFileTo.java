@@ -1,10 +1,8 @@
 package com.example.to;
 
 import com.example.entity.FileInfo;
-import com.example.entity.NxSystemFileInfo;
 import com.example.entity.ShareFile;
 import com.example.entity.UserInfo;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,6 +20,6 @@ public class ShareFileTo extends ShareFile {
         //父类
         this.setFilename(nxfileInfo.getName());
         this.setFirstUserId( userInfo.getId().intValue());
-        this.setFileid(nxfileInfo.getFileId().intValue());
+        this.setFileId(nxfileInfo.getFileId().intValue());
     }
 }
