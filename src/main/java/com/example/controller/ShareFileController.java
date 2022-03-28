@@ -7,6 +7,7 @@ import com.example.service.ShareFileService;
 import com.example.vo.ShareFileVo;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,6 +21,9 @@ public class ShareFileController {
 
     @Resource
     private ShareFileService shareFileService;
+
+    @Resource
+    private NxSystemFileController nxSystemFileController;
     @GetMapping("/all/page")
     public Result<PageInfo<ShareFileVo>> page(@RequestParam(defaultValue = "1") Integer pageNum,
                                               @RequestParam(defaultValue = "5") Integer pageSize){
@@ -34,11 +38,12 @@ public class ShareFileController {
         return Result.success(shareFileService.sharedOrLikesSimple(shareFileVo));
     }
 
-    @GetMapping("/delete/{fileId}")
+    @DeleteMapping("/delete/{fileId}")
     public Result delete(@PathVariable Integer fileId){
         int res = shareFileService.delete(fileId);
+        //删除真实文件
         if (res ==0){
-            return Result.error(Result.error().getCode(), "删除失败");
+            nxSystemFileController.deleteFile(String.valueOf(fileId));
         }
         return Result.success(res);
     }

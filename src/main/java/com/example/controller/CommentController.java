@@ -36,6 +36,7 @@ public class CommentController {
         comment.setFileId(id);
         return Result.success( commentService.selectAllCommentByFileId(comment));
     }
+    //TODO
     @GetMapping("/delete/{commentId}/{publishUserId}")
     public Result delete(@PathVariable("commentId") Integer commentId,@PathVariable("publishUserId")Integer userId
             , HttpSession session){

@@ -1,7 +1,6 @@
 package com.example.service;
 
 import cn.hutool.core.util.StrUtil;
-import com.example.common.ResultCode;
 import com.example.dao.CountInfoDao;
 import com.example.dao.NxSystemFileInfoDao;
 import com.example.entity.NxSystemFileInfo;
@@ -14,9 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service
@@ -46,7 +43,7 @@ public class NxSystemFileInfoService {
         SystemFileInfoHashCode systemFileInfoHashCode = new SystemFileInfoHashCode();
         systemFileInfoHashCode.setFilehashCode(hashcode);
         systemFileInfoHashCode.setFileId(nxSystemFileInfo.getId());
-        fileInfoService.add(systemFileInfoHashCode);
+        fileInfoService.addHash(systemFileInfoHashCode);
         Integer count = countInfoDao.selectAll().get(0).getFileCount()+1;
         countInfoDao.upDateFileCount(count);
         return nxSystemFileInfo;

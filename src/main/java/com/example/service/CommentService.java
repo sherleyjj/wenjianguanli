@@ -13,8 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
 @Service
 public class CommentService {
     @Resource
@@ -33,9 +37,34 @@ public class CommentService {
         example.orderBy("likes").desc();
         return commentDao.selectByExample(example);
     }
+
+    /**
+     * 似乎是成功的，删除评论需要先删除掉redis里面的点赞数据，再删除MySql里面的评论信息
+     * @param commentId
+     * @return
+     */
+    @Transactional
     public int deleteCommentById(Integer commentId){
         Example example = new Example(Comment.class);
         example.createCriteria().andCondition("id=",commentId);
+        Set like = redisUtil.sGet(LIKE_SET_NAME);
+        Stream<String> res = like.stream().filter(new Predicate() {
+            @Override
+            public boolean test(Object o) { //包含commentId的都没被删除
+                String value = ((String) o);
+                if (value.contains("\"commentId\":"+String.valueOf(commentId)))
+                    return true;
+                else
+                    return false;
+            }
+        });
+
+        Iterator index = res.iterator();
+        while (index.hasNext()){
+            redisUtil.setRemove(LIKE_SET_NAME,index.next());
+        }
+
+//        return 0;
         return commentDao.deleteByExample(example);
     }
 
@@ -70,7 +99,7 @@ public class CommentService {
               flag = -1;
         }else {
             comment.setLikes(comment.getLikes()+1);
-//            like.add(jsonObject.toString());
+//            like.addHash(jsonObject.toString());
             redisUtil.sSet(LIKE_SET_NAME,jsonObject.toString());
             flag = 1;
         }

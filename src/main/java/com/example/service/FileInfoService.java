@@ -83,7 +83,7 @@ public class FileInfoService {
         return fileInfoDao.isExistFileByHashCode(hashcode) !=null;
     }
 
-    public SystemFileInfoHashCode add(SystemFileInfoHashCode hashCode){
+    public SystemFileInfoHashCode addHash(SystemFileInfoHashCode hashCode){
 
          fileInfoDao.addHashCode(hashCode);
          return hashCode;
@@ -96,6 +96,7 @@ public class FileInfoService {
     }
 
     //TODO 需要重复验证
+    @Deprecated
     public SharedOrLikes sharedAndLikes(UserInfoVo userInfoVo , FileInfoVo fileInfoVo){
         if (fileInfoDao.isSharedByFileId(fileInfoVo.getFileId()) == 0 ){
             //该文件没有被分享，那么直接分享
@@ -104,6 +105,8 @@ public class FileInfoService {
             shareFileTo.setUserInfo(userInfoVo);
             shareFileTo.setNxfileInfo(fileInfoVo);
             fileInfoDao.shareFile(shareFileTo);
+            int ref = fileInfoDao.selectFileRefernce(fileInfoVo.getFileId());
+            fileInfoDao.updateRef(fileInfoVo.getFileId(),ref + 1);
             return SharedOrLikes.Share;
         }else {
             //TODO 可能会产生重复刷热度的情况

@@ -267,6 +267,7 @@
 <script src="../js/vue2.6.11/vue.min.js"></script>
 <script src="../js/element/index.js"></script>
 <script src="../js/spark-md5.js"></script>
+<script src="../js/opencv.js"></script>
 <!--文件上传js-->
 <script>
     function msg(type, msg) {
@@ -417,6 +418,7 @@
                             this.videoShow = false;
 
                             let img = new Image();
+
                             img.src = this.url;
                             // 加载完成执行
                             img.onload = function(){
@@ -428,7 +430,16 @@
                                 } else {
                                     $('#view-img').css('width', width + 'px').css('height', '270px');
                                 }
+
                             };
+
+                            let src = cv.imread(img)
+                            console.log('image width: ' + src.cols + '\n' +
+                                'image height: ' + src.rows + '\n' +
+                                'image size: ' + src.size().width + '*' + src.size().height + '\n' +
+                                'image depth: ' + src.depth() + '\n' +
+                                'image channels ' + src.channels() + '\n' +
+                                'image type: ' + src.type() + '\n');
                         } else if (/\.mp4$/.test(info.fileName)) {
                             this.imgShow = false;
                             this.videoShow = true;

@@ -95,7 +95,7 @@ public class NxSystemFileController {
 //        NxSystemFileInfo info = new NxSystemFileInfo();
 //        info.setOriginName(originName);
 //        info.setFileName(fileName);
-//        NxSystemFileInfo addInfo = nxSystemFileInfoService.add(info);
+//        NxSystemFileInfo addInfo = nxSystemFileInfoService.addHash(info);
 //
 //        Map<String, String> map = new HashMap<>(2);
 //        map.put("src", "/files/download/" + addInfo.getId());

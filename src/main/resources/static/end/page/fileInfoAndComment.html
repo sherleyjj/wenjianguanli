@@ -112,7 +112,7 @@
                                 <div>
                                     <p>共享大厅</p>
                                 </div>
-<!--                                <button class="btn btn-sm btn-primary" @click="add()">新增</button>-->
+<!--                                <button class="btn btn-sm btn-primary" @click="addHash()">新增</button>-->
 
 <!--                                <input style="margin-left: 20px" type="text" placeholder="请输入文件名称" v-model="name">-->
 
@@ -227,7 +227,7 @@
                             <td class="col-sm-1">用户Id</td>
                             <td>评论</td>
                             <td class="col-sm-1">喜欢</td>
-                            <td class="col-sm-1"></td>
+                            <td class="col-sm-2"></td>
                         </thead>
                         <tbody>
 <!--                        TODO 修改显示内容 当然后台也需要更改
@@ -236,7 +236,16 @@
                                 <td>{{obj.userId}}</td>
                                 <td>{{obj.comment}}</td>
                                 <td>{{obj.likes}}</td>
-                                <td><button class="btn btn-block btn-primary" v-on:click="like(obj,index)"><i class="fa fa-thumbs-up"></i>Like</button></td>
+                                <td>
+                                    <div class="row">
+                                        <div style="display: flex; flex-direction: row;align-content: space-between" class="col-sm-12">
+                                            <button class="btn btn-primary" v-on:click="like(obj,index)"><i class="fa fa-thumbs-up"></i>Like</button>
+                                            |
+                                            |
+                                            <button class="btn btn-primary " v-on:click="deleteComment(obj,index)">Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
 
                         </tbody>
@@ -342,7 +351,21 @@
                     } else {
                         msg('error', res.data.msg);
                     }
-                    console.log(this.tableData);
+                });
+            },
+            deleteComment(obj,index){
+
+                if (this.user.level === 2 && this.commentData[index].userId !== this.user.id) {
+                        msg('warning', '你没有权限进行该操作');
+                        return;
+                }
+                axios.get("/comment/delete/" + obj.id+"/"+this.user.id).then(res => {
+                    if (res.data.code === '0') {
+                        msg('success','评论删除成功');
+                        this.commentData.pop();
+                    } else {
+                        msg('error', res.data.msg);
+                    }
                 });
             },
             showComment:function (obj){
@@ -398,6 +421,7 @@
                         msg('success',"评论成功")
 
                         this.commentData.push(value)
+                        this.entity.comment = ''
                         // this.loadTable(1)
                     }else{
                         msg('error',res.data.msg);
@@ -523,11 +547,9 @@
             },
             del: function (fileId,index) {
                 //不是管理员，或者不是分享用户没有权限
-                if (this.permission.indexOf(2) === -1) {
-                    if (this.tableData[index].firstUserId !== this.user.id){
-                        msg('warning', '你没有权限进行该操作');
-                        return;
-                    }
+                if (this.user.level === 2 && this.tableData[index].firstUserId !== this.user.id) {
+                    msg('warning', '你没有权限进行该操作');
+                    return;
                 }
                 let _this = this;
                 this.$confirm('确认删除？', '系统提示', {

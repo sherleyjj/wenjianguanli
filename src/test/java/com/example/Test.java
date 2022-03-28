@@ -1,18 +1,14 @@
 package com.example;
 
-import com.example.common.Result;
 import com.example.common.until.BigHeap;
 import com.example.controller.*;
 import com.example.dao.FileInfoDao;
 import com.example.dao.UserInfoDao;
-import com.example.entity.Account;
-import com.example.entity.NxSystemFileInfo;
 import com.example.entity.SystemFileInfoHashCode;
 import com.example.service.CommentService;
 import com.example.service.FileInfoService;
 import com.example.service.NxSystemFileInfoService;
 import com.example.to.CommentTo;
-import com.example.to.ShareFileTo;
 import com.example.vo.FileInfoVo;
 import com.example.vo.UserInfoVo;
 import org.junit.runner.RunWith;
@@ -20,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
@@ -64,7 +59,7 @@ public class Test {
         SystemFileInfoHashCode hashCode = new SystemFileInfoHashCode();
         hashCode.setFileId(4L);
         hashCode.setFilehashCode("123435adsaqd");
-        System.out.println(service.add(hashCode));
+        System.out.println(service.addHash(hashCode));
     }
 
     @org.junit.Test
@@ -109,7 +104,7 @@ public class Test {
             userInfoVo.setSex("Male");
             userInfoVo.setEmail("1714203542@qq.com");
             userInfoDao.insertSelective(userInfoVo);
-//            userInfoController.add(userInfoVo);
+//            userInfoController.addHash(userInfoVo);
         }
     }
 
@@ -199,4 +194,16 @@ public class Test {
         shareFileController.delete(88);
     }
 
+    @org.junit.Test
+    public void test14() {
+       int a = 1;
+       int b = ++a*a++;
+       System.out.println(b);
+    }
+
+    //测试delete删除评论
+    @org.junit.Test
+    public void test15() {
+       commentService.deleteCommentById(6);
+    }
 }
