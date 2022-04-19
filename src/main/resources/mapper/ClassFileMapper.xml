@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.dao.ClassFileDao">
+    <delete id="FileBack">
+        delete from class_file_info where type_id = #{typeId} and upload_date > #{date}
+    </delete>
+
+
+    <select id="getAllFileByTypeId" resultType="com.example.vo.ClassFileVo">
+        select c.id ,c.file_id fileId,c.type_id typeId,c.change_record changeRecord,c.upload_date uploadDate,u.name userName,f.originName fileName from class_file_info  c
+            inner join user_info  u on c.user_id = u.id
+            inner join nx_system_file_info f on f.id = c.file_id
+        where type_id = #{id} order by c.upload_date DESC
+
+    </select>
+    <select id="getLatestFileByTypeId" resultType="com.example.entity.ClassFile">
+        select * from class_file_info where type_id =#{id} order by upload_date DESC LIMIT 1
+    </select>
+</mapper>

@@ -327,7 +327,7 @@
                     cancelButtonClass: 'btn-custom-cancel',
                     type: 'warning'
                 }).then(function(){
-                    axios.delete("/typeInfo/" + id).then(res => {
+                    axios.delete("/class/delete/all/" + id).then(res => {
                         if (res.data.code === '0') {
                             msg('success', '删除成功');
                             _this.loadTable(1);

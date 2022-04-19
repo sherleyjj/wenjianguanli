@@ -2,7 +2,9 @@ package com.example.controller;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.poi.excel.ExcelUtil;
@@ -23,6 +25,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +36,8 @@ import java.util.stream.Collectors;
 public class TypeInfoController {
     @Resource
     private TypeInfoService typeInfoService;
+    @Resource
+    private ClassFileService classFileService;
 
     @PostMapping
     public Result<TypeInfo> add(@RequestBody TypeInfoVo typeInfo) {
@@ -40,9 +45,16 @@ public class TypeInfoController {
         return Result.success(typeInfo);
     }
 
+    /**
+     * 删除分类之后，就会删除分组下的所有文件（新功能）
+     * @param id
+     * @return
+     */
+    @Deprecated
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id) {
         typeInfoService.delete(id);
+        classFileService.deleteAll(id.intValue());
         return Result.success();
     }
 
@@ -93,14 +105,25 @@ public class TypeInfoController {
     @GetMapping("/getExcelModel")
     public void getExcelModel(HttpServletResponse response) throws IOException {
         // 1. 生成excel
-        Map<String, Object> row = new LinkedHashMap<>();
-		row.put("name", "");
+        List<List<String >> lists = new ArrayList<List<String>>();
+        List list1 = new ArrayList<>();
+        list1.add("name");
+        list1.add("time");
+        list1.add("record");
+        List list2 = new ArrayList();
+        list2.add("江德鸿");
+        list2.add("18");
+        list2.add("hello world");
 
-        List<Map<String, Object>> list = CollUtil.newArrayList(row);
-
+        lists.add(list1);
+        lists.add(list2);
+        lists.add(list2);
+        lists.add(list2);
+        lists.add(list2);
+        //实验成功一个list为一行
         // 2. 写excel
         ExcelWriter writer = ExcelUtil.getWriter(true);
-        writer.write(list, true);
+        writer.write(lists, true);
 
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8");
         response.setHeader("Content-Disposition","attachment;filename=typeInfoModel.xlsx");

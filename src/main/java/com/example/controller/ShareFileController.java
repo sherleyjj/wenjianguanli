@@ -38,6 +38,7 @@ public class ShareFileController {
         return Result.success(shareFileService.sharedOrLikesSimple(shareFileVo));
     }
 
+    //TODO nx的记录没有删除
     @DeleteMapping("/delete/{fileId}")
     public Result delete(@PathVariable Integer fileId){
         int res = shareFileService.delete(fileId);

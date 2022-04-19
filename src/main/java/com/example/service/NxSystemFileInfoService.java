@@ -31,6 +31,12 @@ public class NxSystemFileInfoService {
     @Autowired
     private CountInfoDao countInfoDao;
 
+    /**
+     * 添加数据到nxfileinfo，然后写入hash
+     * @param hashcode
+     * @param nxSystemFileInfo
+     * @return
+     */
     @Transactional
     public NxSystemFileInfo add(@NonNull String hashcode, NxSystemFileInfo nxSystemFileInfo) {
         if(StrUtil.isBlank(hashcode)){

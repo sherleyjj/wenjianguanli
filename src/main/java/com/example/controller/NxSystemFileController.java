@@ -45,6 +45,9 @@ public class NxSystemFileController {
     @Resource
     private FileInfoService fileInfoService;
 
+    @Resource
+    private IDownloadStrategy downloadStrategy;
+
     /**
      * 前端上传文件，包括文件的hash码，应该先检验hash码再上传，如果调用该方法代表hash是不存在的
      * 目前出现了Request Entity Too Large->bug，这是来自于nginx的配置问题
@@ -57,6 +60,7 @@ public class NxSystemFileController {
     @PostMapping("/upload/{hashcode}")
     public Result upload(MultipartFile file,@PathVariable("hashcode") String hashcode,HttpServletRequest request) throws IOException {
         String originName = file.getOriginalFilename();
+        //杜绝文件名可能一样的情况
         String fileName = FileUtil.mainName(originName) + System.currentTimeMillis() + "." + FileUtil.extName(originName);
         byte [] source = file.getBytes();
         /**
@@ -81,27 +85,6 @@ public class NxSystemFileController {
             return Result.error("4001", "上传失败");
         }
     }
-
-//    @PostMapping("/notice/upload")
-//    public Result<Map<String, String>> noticeUpload(MultipartFile file, HttpServletRequest request) throws IOException {
-//        String originName = file.getOriginalFilename();
-//        // 文件名加个时间戳
-//        String fileName = FileUtil.mainName(originName) + System.currentTimeMillis() + "." + FileUtil.extName(originName);
-//        // 2. 缩小尺寸
-//        FileUtil.mkdir(BASE_PATH);
-//        Thumbnails.of(file.getInputStream()).width(400).toFile(BASE_PATH + fileName);
-//
-//        // 3. 信息入库，获取文件id
-//        NxSystemFileInfo info = new NxSystemFileInfo();
-//        info.setOriginName(originName);
-//        info.setFileName(fileName);
-//        NxSystemFileInfo addInfo = nxSystemFileInfoService.addHash(info);
-//
-//        Map<String, String> map = new HashMap<>(2);
-//        map.put("src", "/files/download/" + addInfo.getId());
-//        map.put("title", originName);
-//        return Result.success(map);
-//    }
 
     @GetMapping("/page/{name}")
     public Result<PageInfo<NxSystemFileInfo>> filePage(@PathVariable String name,
@@ -140,7 +123,6 @@ public class NxSystemFileController {
         response.reset();
         // 设置response的Header
         response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(nxSystemFileInfo.getOriginName(), "UTF-8"));
-        IDownloadStrategy downloadStrategy = new DefaultDownload();
         downloadStrategy.download(response,bytes);
         //        response.addHeader("Content-Length", "" + bytes.length);
 //        OutputStream toClient = new BufferedOutputStream(response.getOutputStream());

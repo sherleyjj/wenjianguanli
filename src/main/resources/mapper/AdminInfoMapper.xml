@@ -3,7 +3,7 @@
 <mapper namespace="com.example.dao.AdminInfoDao">
 
     <select id="checkRepeat" resultType="java.lang.Integer">
-        select count(id) from `admin_info` where ${column} = #{value}
+        select count(id) from `admin_info` where #{column} = #{value}
         <if test="id != null">
             and id != #{id}
         </if>

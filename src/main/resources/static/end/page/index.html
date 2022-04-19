@@ -64,6 +64,19 @@
                 </li>
 
                 <li class="nLi">
+                    <h3><i class="fa fa fa-dashboard icon"></i>分类管理<span class="fa fa-angle-up arrow"></span>
+                    </h3>
+                    <ul class="sub">
+<!--                        TODO 涉及页面传递参数,用cookie-->
+                        <li v-for="(obj,index) in classData">
+                            <a href="#" @click="forwardClass(index)"><i class="fa fa-table"></i>{{obj.name}}</a>
+
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="nLi">
                     <h3><i class="fa fa-unlock-alt"></i>修改密码<span class="fa fa-angle-up arrow"></span></h3>
                     <ul class="sub">
                         <li>
@@ -172,9 +185,11 @@
             echartsModelOptions: [],
             echartsModel: '',
             echartsShowArr: [],
-            echartsType: 'pie'
+            echartsType: 'pie',
+            classData:[]
         },
         created: function () {
+            this.loadTable(1);
             this.user = JSON.parse(localStorage.getItem("user"));
             axios.get('/echarts/options').then(res => {
                 this.echartsModelOptions = res.data.data;
@@ -198,6 +213,22 @@
             });
         },
         methods: {
+            forwardClass(index){
+              localStorage.setItem("classIndex",index);
+              window.location="class.html"
+            },
+            loadTable(pageNum) {
+                axios.get("/typeInfo/page/all"  + "?pageNum=" + pageNum).then(res => {
+                    if (res.data.code === '0') {
+                        this.classData = res.data.data.list;
+                        this.pageInfo = res.data.data;
+                        this.preActive = !(this.pageInfo.hasPreviousPage);
+                        this.nextActive = !(this.pageInfo.hasNextPage);
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
+            },
             drawLine() {
                 axios.get('/echarts/get/' + this.echartsModel).then(res => {
                     // 基于准备好的dom，初始化echarts实例

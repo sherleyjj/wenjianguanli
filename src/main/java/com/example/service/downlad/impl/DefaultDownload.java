@@ -4,11 +4,13 @@ import cn.hutool.core.io.FileUtil;
 import com.example.common.eumn.DownloadType;
 import com.example.service.downlad.IDownloadStrategy;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
 
+@Service
 public class DefaultDownload implements IDownloadStrategy {
     //TODO 准备使用@value从配置文件读取
     private DownloadType downloadType;
@@ -35,13 +37,12 @@ public class DefaultDownload implements IDownloadStrategy {
          */
         //限速成功
         for (; i < sources.length-count; i+=count) {
-            toClient.write(sources,i,count);
+            toClient.write(sources, i, count);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
             }
         }
-        i = i==0?0:i-count;
         toClient.write(sources,i,sources.length-i);
         toClient.flush();
         toClient.close();

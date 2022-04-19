@@ -94,6 +94,10 @@ public class FileInfoService {
         }
         return fileInfoDao.findByHash(hashCode);
     }
+    //TODO
+    public Integer findFileIdByHash(String code){
+        return 0;
+    }
 
     //TODO 需要重复验证
     @Deprecated

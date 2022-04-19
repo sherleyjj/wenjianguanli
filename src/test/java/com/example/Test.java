@@ -1,5 +1,6 @@
 package com.example;
 
+import cn.hutool.core.collection.CollUtil;
 import com.example.common.until.BigHeap;
 import com.example.controller.*;
 import com.example.dao.FileInfoDao;
@@ -205,5 +206,14 @@ public class Test {
     @org.junit.Test
     public void test15() {
        commentService.deleteCommentById(6);
+    }
+
+    @org.junit.Test
+    public void test16(){
+        Map<String, Object> row = new LinkedHashMap<>();
+        row.put("name", "江德鸿");
+        row.put("time","future");
+        List<Map<String, Object>> lists = CollUtil.newArrayList(row);
+
     }
 }
