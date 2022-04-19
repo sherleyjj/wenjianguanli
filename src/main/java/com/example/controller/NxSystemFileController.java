@@ -67,8 +67,6 @@ public class NxSystemFileController {
          * 测试计算hash值，通过byte数组
          */
 //        String md5 =  Md5Crypt.md5Crypt(source);
-        // 2. 文件上传
-        FileUtil.writeBytes(source, BASE_PATH + fileName);
 
         // 3. 信息入库，获取文件id
         NxSystemFileInfo info = new NxSystemFileInfo();
@@ -77,6 +75,9 @@ public class NxSystemFileController {
 
         //4.将文件hash和文件记录都写入表中
         NxSystemFileInfo addInfo = nxSystemFileInfoService.add(hashcode,info);
+        // 2. 文件上传
+
+        FileUtil.writeBytes(source, BASE_PATH + fileName);
 
 
         if (addInfo != null) {

@@ -62,7 +62,17 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nLi">
+                    <h3><i class="fa fa fa-dashboard icon"></i>分类管理<span class="fa fa-angle-up arrow"></span>
+                    </h3>
+                    <ul class="sub">
+                        <!--                        TODO 涉及页面传递参数,用cookie-->
+                        <li v-for="(obj,index) in classData">
+                            <a href="#" @click="forwardClass(index,obj.id)"><i class="fa fa-table"></i>{{obj.name}}</a>
 
+                        </li>
+                    </ul>
+                </li>
                 <li class="nLi">
                     <h3><i class="fa fa-unlock-alt"></i>修改密码<span class="fa fa-angle-up arrow"></span></h3>
                     <ul class="sub">
@@ -298,7 +308,8 @@
             preActive: true,
             nextActive: true,
             user: {},
-            md5s:[]
+            md5s:[],
+            classData:[]
         },
         created: function () {
             this.user = JSON.parse(localStorage.getItem('user'));
@@ -319,10 +330,12 @@
                 }
             });
 
+
 			this.entity.typeId = 0;
 			axios.get("/typeInfo").then(res => {
 				if (res.data.code === '0') {
 					this.typeObjs = res.data.data;
+                    this.classData = res.data.data
 				} else {
 					msg('error', res.data.msg);
 				}
@@ -330,6 +343,11 @@
 
         },
         methods: {
+            forwardClass(index,typeId){
+                localStorage.setItem("typeId",typeId)
+                localStorage.setItem("classIndex",index);
+                window.location="class.html"
+            },
             sharefile:function (obj){
 
                 console.log(obj)

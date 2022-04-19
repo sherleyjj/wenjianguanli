@@ -17,6 +17,7 @@ import com.example.service.ClassFileService;
 import com.example.service.FileInfoService;
 import com.example.service.TypeInfoService;
 import com.example.vo.ClassFileVo;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -52,6 +53,7 @@ public class ClassFileController {
     }
 
     /**
+     * TODO 管理员上传时会因为外键约束失败
      * 显然需要先真实上传文件再add信息到这个地方，因为真实上传后才会有fileId
      * @param classFile
      * @return
@@ -74,7 +76,9 @@ public class ClassFileController {
      * @return
      * @throws IOException
      */
+//    TODO Bug 管理员上传会遇到外键绑定的bug user_info
     @PostMapping("/upload/{hashcode}")
+    @Transactional
     public Result upload(MultipartFile file,
                          HttpServletRequest request,
                          @PathVariable("hashcode")String code) throws IOException {

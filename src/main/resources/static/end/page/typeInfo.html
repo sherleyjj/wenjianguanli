@@ -61,7 +61,17 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nLi">
+                    <h3><i class="fa fa fa-dashboard icon"></i>分类管理<span class="fa fa-angle-up arrow"></span>
+                    </h3>
+                    <ul class="sub">
+                        <!--                        TODO 涉及页面传递参数,用cookie-->
+                        <li v-for="(obj,index) in classData">
+                            <a href="#" @click="forwardClass(index,obj.id)"><i class="fa fa-table"></i>{{obj.name}}</a>
 
+                        </li>
+                    </ul>
+                </li>
                 <li class="nLi">
                     <h3><i class="fa fa-unlock-alt"></i>修改密码<span class="fa fa-angle-up arrow"></span></h3>
                     <ul class="sub">
@@ -229,7 +239,8 @@
             nextActive: true,
             entity: {
                 sex: '男'
-            }
+            },
+            classData:[]
         },
         created: function () {
 
@@ -256,12 +267,17 @@
 
         },
         methods: {
-
+            forwardClass(index,typeId){
+                localStorage.setItem("typeId",typeId)
+                localStorage.setItem("classIndex",index);
+                window.location="class.html"
+            },
             loadTable(pageNum) {
                 let name = this.name === '' ? "all" : this.name;
                 axios.get("/typeInfo/page/" + name + "?pageNum=" + pageNum).then(res => {
                     if (res.data.code === '0') {
                         this.objs = res.data.data.list;
+                        this.classData = res.data.data.list
                         this.pageInfo = res.data.data;
                         this.preActive = !(this.pageInfo.hasPreviousPage);
                         this.nextActive = !(this.pageInfo.hasNextPage);

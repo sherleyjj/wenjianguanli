@@ -67,7 +67,7 @@
                     <ul class="sub">
                         <!--                        TODO 涉及页面传递参数,用cookie-->
                         <li v-for="(obj,index) in classData">
-                            <a href="#" @click="forwardClass(index)"><i class="fa fa-table"></i>{{obj.name}}</a>
+                            <a href="#" @click="forwardClass(index,obj.id)"><i class="fa fa-table"></i>{{obj.name}}</a>
 
                         </li>
                     </ul>
@@ -204,7 +204,8 @@
             authority: [],
             entity: {
                 sex: '男'
-            }
+            },
+            classData:[]
         },
         created: function () {
 
@@ -222,7 +223,19 @@
 
         },
         methods: {
+            forwardClass(index,typeId){
+                localStorage.setItem("typeId",typeId)
+                localStorage.setItem("classIndex",index);
+                window.location="class.html"
+            },
             loadData() {
+                axios.get("/typeInfo/page/all"  + "?pageNum=" + 1).then(res => {
+                    if (res.data.code === '0') {
+                        this.classData = res.data.data.list;
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
                 axios.get("/getAccountInfo").then(res => {
                     if (res.data.code === '0') {
                         this.entity = res.data.data;
